@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-06-2013 07:53:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Entidades.Abogados" table="abogados" catalog="despachoabogados">
+        <id name="idAbogado" type="java.lang.Integer">
+            <column name="idAbogado" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primerApellido" length="45" not-null="true" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundoApellido" length="45" />
+        </property>
+        <property name="noCarne" type="string">
+            <column name="noCarne" length="20" not-null="true" />
+        </property>
+        <property name="cedula" type="string">
+            <column name="cedula" length="15" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" not-null="true" />
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono" />
+        </property>
+        <property name="celular" type="java.lang.Integer">
+            <column name="celular" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <set name="abogadoTipoabogados" inverse="true">
+            <key>
+                <column name="idAbogado" not-null="true" />
+            </key>
+            <one-to-many class="Entidades.AbogadoTipoabogado" />
+        </set>
+    </class>
+</hibernate-mapping>

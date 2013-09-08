@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-06-2013 07:53:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Entidades.Asuntojudicial" table="asuntojudicial" catalog="despachoabogados">
+        <id name="idAsuntoJudicial" type="java.lang.Integer">
+            <column name="idAsuntoJudicial" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tipoasunto" class="Entidades.Tipoasunto" fetch="select">
+            <column name="idTipoAsunto" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="Descripcion" length="50" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="Activo" not-null="true" />
+        </property>
+        <set name="asuntojuzgados" inverse="true">
+            <key>
+                <column name="idAsuntoJudicial" not-null="true" />
+            </key>
+            <one-to-many class="Entidades.Asuntojuzgado" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-06-2013 07:53:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Entidades.PersonaTipopersona" table="persona_tipopersona" catalog="despachoabogados">
+        <composite-id name="id" class="Entidades.PersonaTipopersonaId">
+            <key-property name="idPersona" type="int">
+                <column name="idPersona" />
+            </key-property>
+            <key-property name="idTipoPersona" type="int">
+                <column name="idTipoPersona" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tipopersona" class="Entidades.Tipopersona" update="false" insert="false" fetch="select">
+            <column name="idTipoPersona" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="Entidades.Personas" update="false" insert="false" fetch="select">
+            <column name="idPersona" not-null="true" />
+        </many-to-one>
+        <property name="activo" type="boolean">
+            <column name="Activo" not-null="true" />
+        </property>
+        <set name="detallesexpedientes" inverse="true">
+            <key>
+                <column name="idPersona" not-null="true" />
+                <column name="idTipoPersona" not-null="true" />
+            </key>
+            <one-to-many class="Entidades.Detallesexpediente" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+body{
+    background-color: #F0F8FF;
+}
+
+.conteiner{
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    font-size: 85%;
+}
+
+.ui-state-default .icon-login{
+    background-image: url(../images/icons/login.png);
+}
+
+.ui-state-default .icon-editar{
+    background-image: url(../images/icons/editar.png);
+}
+
+.ui-state-default .icon-crear{
+    background-image: url(../images/icons/crear.png);
+}
+
+.ui-state-default .icon-aceptar{
+    background-image: url(../images/icons/aceptar.png);
+}
+
+.ui-state-default .icon-cancelar{
+    background-image: url(../images/icons/cancelar.png);
+}
+
+.ui-state-default .icon-save{
+    background-image: url(../images/icons/save.png);
+}
+
+.txt{
+    max-width: 180px;
+}

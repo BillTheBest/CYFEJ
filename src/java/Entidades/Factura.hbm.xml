@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-06-2013 07:53:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Entidades.Factura" table="factura" catalog="despachoabogados">
+        <id name="idFactura" type="java.lang.Integer">
+            <column name="idFactura" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="expediente" class="Entidades.Expediente" fetch="select">
+            <column name="idExpediente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="Entidades.Personas" fetch="select">
+            <column name="idPersona" not-null="true" />
+        </many-to-one>
+        <property name="fechaCreacion" type="date">
+            <column name="fechaCreacion" length="10" not-null="true" />
+        </property>
+        <property name="subtotal" type="float">
+            <column name="subtotal" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="iva" type="float">
+            <column name="iva" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="total" type="float">
+            <column name="total" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="medioPago" type="string">
+            <column name="medioPago" length="30" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="30" not-null="true" />
+        </property>
+        <property name="activo" type="boolean">
+            <column name="Activo" not-null="true" />
+        </property>
+        <set name="detallefacturas" inverse="true">
+            <key>
+                <column name="idFactura" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="Entidades.Detallefactura" />
+        </set>
+    </class>
+</hibernate-mapping>

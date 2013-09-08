@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Plantillas/Principal.xhtml">
+            <ui:define name="title">Catálogo de Personas</ui:define>
+            <ui:define name="content">
+                <p:growl id="msgs" showDetail="true" />
+                <h:form>
+                    <p:commandButton id="btnCrearUsuario" value="Crear" update=":frmCrear" oncomplete="dialogPersonaCrear.show()" icon="icon-crear" title="Crear"/>
+                </h:form>
+                <h:form id="regPersonas">
+                    <p:dataTable var="persona" value="#{personasBean.listaPersonas()}" emptyMessage="Datos no Disponibles" 
+                                 paginator="true" rows="10" paginatorPosition="bottom,top"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" editable="true">
+                        
+                        <f:facet name="header">  
+                            Registro de Personas
+                        </f:facet>
+                        
+                        <p:column headerText="Id" style="width:5%; text-align:center">
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.idPersona}" />
+                            </f:facet>   
+                        </p:column>  
+
+                        <p:column headerText="Nombre" style="width:15%; text-align: center"> 
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.nombrePersona}" />  
+                            </f:facet>   
+                        </p:column>  
+
+                        <p:column headerText="Primer Apellido" style="width:15%; text-align: center">   
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.primerApellidoPersona}" />  
+                            </f:facet>  
+                        </p:column>  
+
+                        <p:column headerText="Segundo Apellido" style="width:15%; text-align: center">
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.segundoApellidoPersona}" />
+                            </f:facet>  
+                        </p:column>  
+
+                        <p:column headerText="Cedula" style="width:15%; text-align: center">  
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.cedulaPersona}" />  
+                            </f:facet>  
+                        </p:column>  
+
+                        <p:column headerText="Direccion" style="width:20%; text-align: center"> 
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.direccionPersona}" />  
+                            </f:facet>   
+                        </p:column>
+
+                        <p:column headerText="Telefono" style="width:15%; text-align: center"> 
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.telefonoPersona}" />
+                            </f:facet> 
+                        </p:column>  
+
+                        <p:column headerText="Celular" style="width:15%; text-align: center">  
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.celularPersona}" />  
+                            </f:facet>  
+                        </p:column>  
+
+                        <p:column headerText="Email" style="width:20%; text-align: center">
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.emailPersona}" />  
+                            </f:facet>  
+                        </p:column>
+
+                        <p:column headerText="Observaciones" style="width:20%; text-align: center">  
+                            <f:facet name="output">  
+                                <h:outputText value="#{persona.observaciones}" />  
+                            </f:facet>   
+                        </p:column>
+                        <p:column style="width:4%">  
+                            <p:commandButton id="selectButton" update=":frmActualizar" oncomplete="dialogPersonaActualizar.show()" icon="icon-editar" title="Editar">  
+                                <f:setPropertyActionListener value="#{persona}" target="#{personasBean.entidadPersonas}" />  
+                            </p:commandButton>  
+                        </p:column>
+                    </p:dataTable> 
+
+                </h:form>
+                <h:form id="frmCrear">
+
+                    <p:dialog header="Crear" widgetVar="dialogPersonaCrear" resizable="false" id="perDlgCrear"  
+                              showEffect="fade" hideEffect="explode" modal="false">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+                            <h:outputText value="ID:" />  
+                            <p:inputText value="#{personasBean.idPersona}" style="font-weight:bold" readonly="true"/>  
+
+                            <h:outputText value="Nombre:" />  
+                            <p:inputText value="#{personasBean.nombrePersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Primer Apellido:" />  
+                            <p:inputText value="#{personasBean.primerApellidoPersona}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Segundo Apellido:" />  
+                            <p:inputText value="#{personasBean.segundoApellidoPersona}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Cedula:" />  
+                            <p:inputText value="#{personasBean.cedulaPersona}" style="font-weight:bold"/>
+
+                            <h:outputText value="Direccion:" />  
+                            <p:inputText value="#{personasBean.direccionPersona}" style="font-weight:bold"/> 
+                            
+                            <h:outputText value="Telefono:" />  
+                            <p:inputText value="#{personasBean.telefonoPersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Celular:" />  
+                            <p:inputText value="#{personasBean.celularPersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Correo:" />  
+                            <p:inputText value="#{personasBean.emailPersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Observaciones:" />  
+                            <p:inputText value="#{personasBean.observaciones}" style="font-weight:bold"/>
+                            
+                            <f:facet name="footer">
+                                <p:separator/>
+                                <p:commandButton id="btnCrearAceptar" value="Guardar" update=":regPersonas, :msgs" 
+                                                 actionListener="#{personasBean.guardar(evt)}" oncomplete="dialogPersonaCrear.hide()" 
+                                                 icon="icon-save" title="Guardar"/>
+                                <p:commandButton id="btnCrearCancelar" value="Cancelar" oncomplete="dialogPersonaCrear.hide()" 
+                                                 icon="icon-cancelar" title="Cancelar"/>
+                            </f:facet>
+
+                        </h:panelGrid>  
+
+                    </p:dialog>  
+
+                </h:form>
+                
+                <h:form id="frmActualizar">
+
+                    <p:dialog header="Editar" widgetVar="dialogPersonaActualizar" resizable="false" id="perDlgActualizar"  
+                              showEffect="fade" hideEffect="explode" modal="false">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+                            <h:outputText value="ID:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.idPersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Nombre:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.nombrePersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Primer Apellido:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.primerApellidoPersona}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Segundo Apellido:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.segundoApellidoPersona}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Cedula:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.cedulaPersona}" style="font-weight:bold"/>
+
+                            <h:outputText value="Direccion:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.direccionPersona}" style="font-weight:bold"/> 
+                            
+                            <h:outputText value="Telefono:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.telefonoPersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Celular:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.celularPersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Correo:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.emailPersona}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Observaciones:" />  
+                            <p:inputText value="#{personasBean.entidadPersonas.observaciones}" style="font-weight:bold"/>
+                            
+                            <f:facet name="footer">
+                                <p:separator/>
+                                <p:commandButton id="btnActualizarAceptar" value="Guardar" update=":regPersonas, :msgs" 
+                                                 actionListener="#{personasBean.actualizar(evt)}"
+                                                 oncomplete="dialogPersonaActualizar.hide()" icon="icon-save" title="Guardar"/>
+                                <p:commandButton id="btnActualizararCancelar" value="Cancelar" oncomplete="dialogPersonaActualizar.hide()" 
+                                                 icon="icon-cancelar" title="Cancelar"/>
+                            </f:facet>
+
+                        </h:panelGrid>  
+
+                    </p:dialog>  
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

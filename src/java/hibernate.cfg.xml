@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/DespachoAbogados?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">giokast9020</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="Entidades/Asuntojuzgado.hbm.xml"/>
+    <mapping resource="Entidades/Estadoexpediente.hbm.xml"/>
+    <mapping resource="Entidades/Factura.hbm.xml"/>
+    <mapping resource="Entidades/Estadoevolutivo.hbm.xml"/>
+    <mapping resource="Entidades/Tipoaviso.hbm.xml"/>
+    <mapping resource="Entidades/Detallefactura.hbm.xml"/>
+    <mapping resource="Entidades/Detallesexpediente.hbm.xml"/>
+    <mapping resource="Entidades/Expediente.hbm.xml"/>
+    <mapping resource="Entidades/Tipoabogado.hbm.xml"/>
+    <mapping resource="Entidades/Tipoasunto.hbm.xml"/>
+    <mapping resource="Entidades/Departamento.hbm.xml"/>
+    <mapping resource="Entidades/Tipopersona.hbm.xml"/>
+    <mapping resource="Entidades/AbogadoTipoabogado.hbm.xml"/>
+    <mapping resource="Entidades/Personas.hbm.xml"/>
+    <mapping resource="Entidades/Abogados.hbm.xml"/>
+    <mapping resource="Entidades/Usuarios.hbm.xml"/>
+    <mapping resource="Entidades/Juzgados.hbm.xml"/>
+    <mapping resource="Entidades/PersonaTipopersona.hbm.xml"/>
+    <mapping resource="Entidades/Asuntojudicial.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
