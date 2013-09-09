@@ -2,7 +2,10 @@ package Entidades;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
 
+import DAO.Despachos.Abogados.AbogadosDAO;
+import DAO.Despachos.Abogados.AbogadosDAOimpl;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,11 +38,13 @@ public class Abogados  implements java.io.Serializable {
      private Integer celular;
      private String email;
      private Set abogadoTipoabogados = new HashSet(0);
+     private AbogadosDAO dao;
 
     public Abogados() {
+        dao = new AbogadosDAOimpl();
+        
     }
 
-	
     public Abogados(String nombre, String primerApellido, String noCarne, String cedula, String direccion) {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
@@ -160,9 +165,13 @@ public class Abogados  implements java.io.Serializable {
         this.abogadoTipoabogados = abogadoTipoabogados;
     }
 
+    public List<Abogados> listaAbogados() {
+        return dao.findAllAbogados();
+    }
 
-
-
+    public boolean GuardarAbogados(Abogados entidad) {
+        return dao.Crearabogados(entidad);
+    }
 }
 
 
