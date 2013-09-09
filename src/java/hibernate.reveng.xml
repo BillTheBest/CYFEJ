@@ -21,4 +21,5 @@
   <table-filter match-name="estadoevolutivo"/>
   <table-filter match-name="expediente"/>
   <table-filter match-name="persona_tipopersona"/>
+  <table-filter match-name="estado"/>
 </hibernate-reverse-engineering>

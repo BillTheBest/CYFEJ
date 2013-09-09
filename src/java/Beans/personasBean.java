@@ -146,12 +146,13 @@ public class personasBean {
 
         if(entidadPersonas.GuardarPersona(entidadPersonas)){
             msg = "Registro Guardado Exitosamente";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             msg = "Error al Insertar los Datos";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
-        FacesContext.getCurrentInstance().addMessage(null, message);
         
     }
     

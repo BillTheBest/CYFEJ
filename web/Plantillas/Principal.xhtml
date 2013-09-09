@@ -16,7 +16,7 @@
     <h:body>
 
         <div id="top" class="ui-widget-header ui-corner-all">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top"><h1>Sistema de Control y Facturación de Expedientes Jurídicos</h1></ui:insert>
         </div>
         
         <div id="menuBar">
@@ -25,6 +25,7 @@
                     <p:submenu label="Registro" icon="ui-icon-document">  
                         <p:menuitem value="Personas" url="#{appBean.urlPath()}frmCatalogoPersonas.xhtml" />
                         <p:menuitem value="Abogados" url="#{appBean.urlPath()}frmCatalogoabogados.xhtml" />
+                        <p:menuitem value="Tipos de Asunto" url="#{appBean.urlPath()}frmCatalogoTipoAsunto.xhtml" />
                         <p:separator />  
                         <p:menuitem value="Quit" url="#" />  
                     </p:submenu>  

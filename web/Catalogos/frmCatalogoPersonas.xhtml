@@ -12,24 +12,22 @@
             <ui:define name="title">Catálogo de Personas</ui:define>
             <ui:define name="content">
                 <p:growl id="msgs" showDetail="true" />
-                <h:form>
-                    <p:commandButton id="btnCrearUsuario" value="Crear" update=":frmCrear" oncomplete="dialogPersonaCrear.show()" icon="icon-crear" title="Crear"/>
-                </h:form>
+                <br/>
+                <center>
+                    <h:form>
+                        <p:commandButton id="btnCrearPersona" value="Crear" update=":frmCrear" oncomplete="dialogPersonaCrear.show()" icon="icon-crear" title="Crear"/>
+                    </h:form>
+                </center>
+                <br/>
                 <h:form id="regPersonas">
                     <p:dataTable var="persona" value="#{personasBean.listaPersonas()}" emptyMessage="Datos no Disponibles" 
-                                 paginator="true" rows="10" paginatorPosition="bottom,top"
+                                 paginator="true" rows="10"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" editable="true">
                         
                         <f:facet name="header">  
                             Registro de Personas
                         </f:facet>
-                        
-                        <p:column headerText="Id" style="width:5%; text-align:center">
-                            <f:facet name="output">  
-                                <h:outputText value="#{persona.idPersona}" />
-                            </f:facet>   
-                        </p:column>  
 
                         <p:column headerText="Nombre" style="width:15%; text-align: center"> 
                             <f:facet name="output">  
@@ -79,11 +77,6 @@
                             </f:facet>  
                         </p:column>
 
-                        <p:column headerText="Observaciones" style="width:20%; text-align: center">  
-                            <f:facet name="output">  
-                                <h:outputText value="#{persona.observaciones}" />  
-                            </f:facet>   
-                        </p:column>
                         <p:column style="width:4%">  
                             <p:commandButton id="selectButton" update=":frmActualizar" oncomplete="dialogPersonaActualizar.show()" icon="icon-editar" title="Editar">  
                                 <f:setPropertyActionListener value="#{persona}" target="#{personasBean.entidadPersonas}" />  
@@ -92,14 +85,15 @@
                     </p:dataTable> 
 
                 </h:form>
+                
                 <h:form id="frmCrear">
 
                     <p:dialog header="Crear" widgetVar="dialogPersonaCrear" resizable="false" id="perDlgCrear"  
                               showEffect="fade" hideEffect="explode" modal="false">  
 
                         <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-                            <h:outputText value="ID:" />  
-                            <p:inputText value="#{personasBean.idPersona}" style="font-weight:bold" readonly="true"/>  
+                            <!--<h:outputText value="ID:" />-->  
+                            <h:inputHidden value="#{personasBean.idPersona}"/>  
 
                             <h:outputText value="Nombre:" />  
                             <p:inputText value="#{personasBean.nombrePersona}" style="font-weight:bold"/>  
@@ -116,6 +110,12 @@
                             <h:outputText value="Direccion:" />  
                             <p:inputText value="#{personasBean.direccionPersona}" style="font-weight:bold"/> 
                             
+                            <h:outputText value="Tipo Persona:" />  
+                            <p:selectOneMenu id="cboTipoPersona" value="#{personaTipoPersonaBean.entidad.id.idTipoPersona}">
+                                <f:selectItem itemLabel="- Seleccione -" itemValue=""/>
+                                <f:selectItems value="#{tipoPersonaBean.listaPersonas}"/>
+                            </p:selectOneMenu>
+                            
                             <h:outputText value="Telefono:" />  
                             <p:inputText value="#{personasBean.telefonoPersona}" style="font-weight:bold"/>  
 
@@ -127,6 +127,12 @@
 
                             <h:outputText value="Observaciones:" />  
                             <p:inputText value="#{personasBean.observaciones}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Estado:" />  
+                            <p:selectOneMenu id="cboActivo" value="#{personaTipoPersonaBean.entidad.activo}">
+                                <f:selectItem itemLabel="Activo" itemValue="1"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="0"/>
+                            </p:selectOneMenu>
                             
                             <f:facet name="footer">
                                 <p:separator/>
@@ -149,8 +155,8 @@
                               showEffect="fade" hideEffect="explode" modal="false">  
 
                         <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-                            <h:outputText value="ID:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.idPersona}" style="font-weight:bold"/>  
+                            <!--<h:outputText value="ID:" />-->  
+                            <h:inputHidden value="#{personasBean.entidadPersonas.idPersona}"/>  
 
                             <h:outputText value="Nombre:" />  
                             <p:inputText value="#{personasBean.entidadPersonas.nombrePersona}" style="font-weight:bold"/>  

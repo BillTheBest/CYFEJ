@@ -2,6 +2,8 @@ package Entidades;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
 
+import DAO.Despachos.Personas.PersonaTipoPersonaDAO;
+import DAO.Despachos.Personas.PersonaTipoPersonaDAOimpl;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.AttributeOverride;
@@ -31,8 +33,10 @@ public class PersonaTipopersona  implements java.io.Serializable {
      private Personas personas;
      private boolean activo;
      private Set detallesexpedientes = new HashSet(0);
+     private PersonaTipoPersonaDAO dao;
 
     public PersonaTipopersona() {
+        dao = new PersonaTipoPersonaDAOimpl();
     }
 
 	
@@ -98,8 +102,9 @@ public class PersonaTipopersona  implements java.io.Serializable {
         this.detallesexpedientes = detallesexpedientes;
     }
 
-
-
+    public boolean guardarPTP(PersonaTipopersona entidad){
+        return dao.createPTP(entidad);
+    }
 
 }
 
