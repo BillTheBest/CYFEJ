@@ -22,7 +22,6 @@ import javax.persistence.Table;
     ,catalog="despachoabogados"
 )
 public class Departamento  implements java.io.Serializable {
-
      private Integer idDepartamento;
      private String nombreDepartamento;
      private Set juzgadoses = new HashSet(0);

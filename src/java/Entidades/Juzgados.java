@@ -28,7 +28,6 @@ import javax.persistence.Table;
 )
 public class Juzgados  implements java.io.Serializable {
 
-
      private Integer idJuzgados;
      private Departamento departamento;
      private String descripcion;

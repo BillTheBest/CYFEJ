@@ -14,6 +14,7 @@ import org.hibernate.Session;
  * @author Usuario
  */
 public class JuzgadosDAOimpl implements JuzgadosDAO{
+    
     @Override
     public boolean actualizarjuzgados(Juzgados entidad) {
        boolean bandera;

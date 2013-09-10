@@ -35,7 +35,6 @@ public class abogadosBean {
     private Abogados entidadAbogados;    
     
     public abogadosBean() {
-        
         entidadAbogados = new Abogados();
     }
 
