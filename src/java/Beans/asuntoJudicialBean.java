@@ -4,40 +4,37 @@
  */
 package Beans;
 
-import Entidades.Tipoasunto;
+import Entidades.Asuntojudicial;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 
 /**
  *
  * @author Tellin
  */
-@Named(value = "tipoAsuntoBean")
+@Named(value = "asuntoJudicialBean")
 @RequestScoped
-public class tipoAsuntoBean {
+public class asuntoJudicialBean {
 
-    private Integer idTipoAsunto;
+    private Integer idAsuntoJudicial;
     private String descripcion;
     private boolean activo;
-    private Tipoasunto entidad;
-    private List<SelectItem> listaTipoAsunto;
+    private Asuntojudicial entidadAsuntojudicial;
     
-    public tipoAsuntoBean() {
-        entidad = new Tipoasunto();
+    public asuntoJudicialBean() {
+        entidadAsuntojudicial = new Asuntojudicial();
     }
 
-    public Integer getIdTipoAsunto() {
-        return idTipoAsunto;
+    public Integer getIdAsuntoJudicial() {
+        return idAsuntoJudicial;
     }
 
-    public void setIdTipoAsunto(Integer idTipoAsunto) {
-        this.idTipoAsunto = idTipoAsunto;
+    public void setIdAsuntoJudicial(Integer idAsuntoJudicial) {
+        this.idAsuntoJudicial = idAsuntoJudicial;
     }
 
     public String getDescripcion() {
@@ -56,43 +53,26 @@ public class tipoAsuntoBean {
         this.activo = activo;
     }
 
-    public Tipoasunto getEntidad() {
-        return entidad;
+    public Asuntojudicial getEntidadAsuntojudicial() {
+        return entidadAsuntojudicial;
     }
 
-    public void setEntidad(Tipoasunto entidad) {
-        this.entidad = entidad;
+    public void setEntidadAsuntojudicial(Asuntojudicial entidadAsuntojudicial) {
+        this.entidadAsuntojudicial = entidadAsuntojudicial;
     }
     
-    public List<Tipoasunto> listaTipoAsunto(){
-        return entidad.listaTipoAsunto();
-    }
-    
-    public List<SelectItem> getItemTipoAsunto(){
-        listaTipoAsunto = new ArrayList<SelectItem>();
-        List<Tipoasunto> lista = entidad.listaTipoAsunto();
-        for (Tipoasunto tipoasunto : lista) {
-            SelectItem item = new SelectItem(tipoasunto.getIdTipoAsunto(), tipoasunto.getDescripcion());
-            listaTipoAsunto.add(item);
-        }
-        return listaTipoAsunto;
-//        List<Tipoasunto> lista = entidad.listaTipoAsunto();
-//        listaTipoAsunto = new SelectItem[lista.size()+1];
-//        listaTipoAsunto[0] = new SelectItem("", "Select"); 
-//        for(int i = 0; i < lista.size(); i++) {  
-//            listaTipoAsunto[i + 1] = new SelectItem(lista.get(i).getIdTipoAsunto(), lista.get(i).getDescripcion());  
-//        } 
-//        return listaTipoAsunto;
+    public List<Asuntojudicial> listaAsunto(){
+        return entidadAsuntojudicial.listaAsunto();
     }
     
     public void guardar(ActionEvent evt){
         
         String msg;
-        entidad.setIdTipoAsunto(idTipoAsunto);
-        entidad.setDescripcion(descripcion);
-        entidad.setActivo(activo);
+        entidadAsuntojudicial.setIdAsuntoJudicial(idAsuntoJudicial);
+        entidadAsuntojudicial.setDescripcion(descripcion);
+        entidadAsuntojudicial.setActivo(activo);
 
-        if(entidad.guardarTipoAsunto(entidad)){
+        if(entidadAsuntojudicial.guardarAsunto(entidadAsuntojudicial)){
             msg = "Registro Guardado Exitosamente";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -108,7 +88,7 @@ public class tipoAsuntoBean {
         
         String msg;
 
-        if(entidad.actualizarTipoAsunto(entidad)){
+        if(entidadAsuntojudicial.actualizarAsunto(entidadAsuntojudicial)){
             msg = "Registro Guardado Exitosamente";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -119,5 +99,4 @@ public class tipoAsuntoBean {
         }
         
     }
-    
 }

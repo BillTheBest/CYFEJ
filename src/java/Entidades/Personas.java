@@ -198,6 +198,10 @@ public class Personas  implements java.io.Serializable {
     public boolean GuardarPersona(Personas entidad){
         return dao.CreatePersons(entidad);
     }
+    
+    public boolean actualizarPersona(Personas entidad){
+        return  dao.UpdatePersons(entidad);
+    }
 
 }
 

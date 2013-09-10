@@ -35,6 +35,7 @@ public class Tipoasunto  implements java.io.Serializable {
 
     public Tipoasunto() {
         dao = new TipoAsuntoDAOimpl();
+        idTipoAsunto = 0;
     }
 
 	

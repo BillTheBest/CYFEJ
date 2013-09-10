@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -11,9 +14,123 @@
                 Asuntos Judiciales
             </ui:define>
             <ui:define name="content">
+                <p:growl id="msgs" showDetail="true" />
+                <br/>
+                <center>
+                    <h:form>
+                        <p:commandButton id="btnCrearAsuntoJudicial" value="Crear" update=":frmCrear" oncomplete="dialogAsuntoJudicialCrear.show()" icon="icon-crear" title="Crear"/>
+                    </h:form>
+                </center>
+                <br/>
+                <h:form id="regAsuntosJudicial">
+                    <p:dataTable var="asuntoJudicial" value="#{asuntoJudicialBean.listaAsunto()}" emptyMessage="Datos no Disponibles" 
+                                 paginator="true" rows="10"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" editable="true">
+                        
+                        <f:facet name="header">  
+                            Asuntos Judiciales
+                        </f:facet> 
+
+                        <p:column headerText="Descripcion" style="width:15%; text-align: center" filterBy="#{asuntoJudicial.descripcion}">
+                            <h:outputText value="#{asuntoJudicial.descripcion}"/>
+                        </p:column> 
+                        
+                        <p:column headerText="Tipo Asunto" style="width:15%; text-align: center" >
+<!--                                  filterBy="#{asuntoJudicial.tipoasunto.idTipoAsunto}" 
+                                  filterOptions="#{tipoAsuntoBean.itemTipoAsunto}"
+                                  filterMatchMode="exact">-->
+                            <h:outputText value="#{asuntoJudicial.tipoasunto.descripcion}"/>
+                        </p:column>
+
+                        <p:column headerText="Activo" style="width:15%; text-align: center"> 
+                            <p:selectBooleanCheckbox value="#{asuntoJudicial.activo}"/>
+                        </p:column> 
+
+                        <p:column style="width:1%; text-align: center">  
+                            <p:commandButton id="selectButton" update=":frmActualizar" oncomplete="dialogAsuntoJudicialActualizar.show()" icon="icon-editar" title="Editar">  
+                                <f:setPropertyActionListener value="#{asuntoJudicial}" target="#{asuntoJudicialBean.entidadAsuntojudicial}" />  
+                            </p:commandButton>  
+                        </p:column>
+                    </p:dataTable> 
+
+                </h:form>
+                
+                <h:form id="frmCrear">
+
+                    <p:dialog header="Crear" widgetVar="dialogAsuntoJudicialCrear" resizable="false" id="ajDlgCrear"  
+                              showEffect="fade" hideEffect="explode" modal="false">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+                            <!--<h:outputText value="ID:" />-->  
+                            <h:inputHidden value="#{asuntoJudicialBean.idAsuntoJudicial}"/>  
+
+                            <h:outputText value="Descripcion:" />  
+                            <p:inputText value="#{asuntoJudicialBean.descripcion}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Tipo Asunto:" />  
+                            <p:selectOneMenu id="cboTipoPersona" 
+                                value="#{asuntoJudicialBean.entidadAsuntojudicial.tipoasunto.idTipoAsunto}">
+                                <f:selectItem itemLabel="- Seleccione -" itemValue=""/>
+                                <f:selectItems value="#{tipoAsuntoBean.itemTipoAsunto}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Activo:" />  
+                            <p:selectBooleanCheckbox value="#{asuntoJudicialBean.activo}"/>
+                            
+                            <f:facet name="footer">
+                                <p:separator/>
+                                <p:commandButton id="btnGuardarAceptar" value="Guardar" update=":regAsuntosJudicial, :msgs" 
+                                                 actionListener="#{asuntoJudicialBean.guardar(evt)}"
+                                                 oncomplete="dialogAsuntoJudicialCrear.hide()" icon="icon-save" title="Guardar"/>
+                                <p:commandButton id="btnGuardarCancelar" value="Cancelar" oncomplete="dialogAsuntoJudicialCrear.hide()" 
+                                                 icon="icon-cancelar" title="Cancelar"/>
+                            </f:facet>
+
+                        </h:panelGrid>  
+
+                    </p:dialog>  
+
+                </h:form>
+                
+                <h:form id="frmActualizar">
+
+                    <p:dialog header="Editar" widgetVar="dialogAsuntoJudicialActualizar" resizable="false" id="ajDlgActualizar"  
+                              showEffect="fade" hideEffect="explode" modal="false">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+                            <!--<h:outputText value="ID:" />-->  
+                            <h:inputHidden value="#{asuntoJudicialBean.entidadAsuntojudicial.idAsuntoJudicial}"/>  
+
+                            <h:outputText value="Descripcion:" />  
+                            <p:inputText value="#{asuntoJudicialBean.entidadAsuntojudicial.descripcion}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Tipo Asunto:" />  
+                            <p:selectOneMenu id="cboTipoPersona" 
+                                value="#{asuntoJudicialBean.entidadAsuntojudicial.tipoasunto.idTipoAsunto}">
+                                <f:selectItem itemLabel="- Seleccione -" itemValue=""/>
+                                <f:selectItems value="#{tipoAsuntoBean.itemTipoAsunto}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Activo:" />  
+                            <p:selectBooleanCheckbox value="#{asuntoJudicialBean.entidadAsuntojudicial.activo}"/>
+                            
+                            <f:facet name="footer">
+                                <p:separator/>
+                                <p:commandButton id="btnActualizarAceptar" value="Guardar" update=":regAsuntosJudicial, :msgs" 
+                                                 actionListener="#{asuntoJudicialBean.actualizar(evt)}"
+                                                 oncomplete="dialogAsuntoJudicialActualizar.hide()" icon="icon-save" title="Guardar"/>
+                                <p:commandButton id="btnActualizararCancelar" value="Cancelar" oncomplete="dialogAsuntoJudicialActualizar.hide()" 
+                                                 icon="icon-cancelar" title="Cancelar"/>
+                            </f:facet>
+
+                        </h:panelGrid>  
+
+                    </p:dialog>  
+
+                </h:form>
                 
             </ui:define>
-
         </ui:composition>
 
     </body>

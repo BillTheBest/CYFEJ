@@ -32,16 +32,12 @@
                             Tipos de Asuntos
                         </f:facet> 
 
-                        <p:column headerText="Descripcion" style="width:15%; text-align: center">   
-                            <f:facet name="output">
-                                <h:outputText value="#{tiposAsunto.descripcion}"/>
-                            </f:facet>  
+                        <p:column headerText="Descripcion" style="width:15%; text-align: center">
+                            <h:outputText value="#{tiposAsunto.descripcion}"/>
                         </p:column>  
 
-                        <p:column headerText="Activo" style="width:15%; text-align: center">
-                            <f:facet name="output">  
-                                <p:selectBooleanCheckbox value="#{tiposAsunto.activo}"/>
-                            </f:facet>  
+                        <p:column headerText="Activo" style="width:15%; text-align: center"> 
+                            <p:selectBooleanCheckbox value="#{tiposAsunto.activo}"/>
                         </p:column> 
 
                         <p:column style="width:1%; text-align: center">  
