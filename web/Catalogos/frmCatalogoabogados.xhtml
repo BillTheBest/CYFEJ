@@ -29,64 +29,50 @@ and open the template in the editor.
                         </f:facet>
                      
                         <p:column headerText="Id" style="width:5%; text-align:center">
-                            
                                 <h:outputText value="#{abogados.idAbogado}" />
-                             
                         </p:column> 
                         
                         <p:column headerText="Nombre" style="width:15%; text-align: center"> 
-                          
                                 <h:outputText value="#{abogados.nombre}" />  
-                            
                         </p:column>  
                         
                         <p:column headerText="PrimerApellido" style="width:15%; text-align: center"> 
-                            
-                                <h:outputText value="#{abogados.primerApellido}" />  
-                              
+                                <h:outputText value="#{abogados.primerApellido}" /> 
                         </p:column>  
                         
                         <p:column headerText="SegundoApellido" style="width:15%; text-align: center"> 
-                           
-                                <h:outputText value="#{abogados.segundoApellido}" />  
-                              
+                                <h:outputText value="#{abogados.segundoApellido}" /> 
                         </p:column> 
                         
-                        <p:column headerText="NumCarnet" style="width:15%; text-align: center"> 
-                             
-                                <h:outputText value="#{abogados.noCarne}" />  
-                               
+                        <p:column headerText="NumCarnet" style="width:15%; text-align: center">
+                                <h:outputText value="#{abogados.noCarne}" /> 
                         </p:column>
                         
-                        <p:column headerText="Cedula" style="width:15%; text-align: center"> 
-                             
-                                <h:outputText value="#{abogados.cedula}" />  
-                             
+                        <p:column headerText="Cedula" style="width:15%; text-align: center">
+                                <h:outputText value="#{abogados.cedula}" /> 
                         </p:column> 
                         
-                        <p:column headerText="Direccion" style="width:15%; text-align: center"> 
-                         
-                             <h:outputText value="#{abogados.direccion}" />  
-                          
+                        <p:column headerText="Direccion" style="width:15%; text-align: center">
+                             <h:outputText value="#{abogados.direccion}" /> 
                         </p:column> 
                         
                         <p:column headerText="Telefono" style="width:15%; text-align: center"> 
-                          
                              <h:outputText value="#{abogados.telefono}" />  
-                          
                         </p:column>
                         
                         <p:column headerText="Celular" style="width:15%; text-align: center"> 
-                        
                              <h:outputText value="#{abogados.celular}" />  
-                          
                         </p:column>
                         
-                        <p:column headerText="Email" style="width:15%; text-align: center"> 
-                       
-                             <h:outputText value="#{abogados.email}" />  
-                         
+                        <p:column headerText="Email" style="width:15%; text-align: center">
+                             <h:outputText value="#{abogados.email}" /> 
                         </p:column>
+                        
+<!--                        <p:column headerText="Tipo de abogado" style="width:15%; text-align: center"> 
+                             
+                            <h:outputText value="#{abogados.abogadoTipoabogados}" />  
+                             
+                        </p:column>  -->
                         
                         <p:column style="width:4%">  
                             <p:commandButton id="selectButton" update=":frmActualizar" oncomplete="dialogAbogadosActualizar.show()" icon="icon-editar" title="Editar">  
@@ -131,6 +117,16 @@ and open the template in the editor.
 
                             <h:outputText value="Email:" />  
                             <p:inputText value="#{abogadosBean.email}" style="font-weight:bold"/>  
+                            
+<!--                            <h:outputText value="Tipo de abogado:" />  
+                            <p:selectOneMenu id="cboTipoAbogado" 
+                                             value="#{abogadosBean.entidadAbogados.abogadoTipoabogados}">  
+                                <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItem itemLabel="Abogados" itemValue="1"/>
+                                <f:selectItem itemLabel="Procurador" itemValue="2"/>
+                              
+                            </p:selectOneMenu>-->
+
                                                       
                             <f:facet name="footer">
                                 <p:separator/>
@@ -179,6 +175,14 @@ and open the template in the editor.
 
                             <h:outputText value="Email:" />  
                             <p:inputText value="#{abogadosBean.entidadAbogados.email}" style="font-weight:bold"/>
+                            
+<!--                            <h:outputText value="Tipo de abogado:" />  
+                            <p:selectOneMenu id="cboTipoAbogado"  value="">  
+                                <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                                <f:selectItem itemLabel="Abogados" itemValue="1"/>
+                                <f:selectItem itemLabel="Procurador" itemValue="2"/>
+                              
+                            </p:selectOneMenu>-->
                             
                             <f:facet name="footer">
                                 <p:separator/>

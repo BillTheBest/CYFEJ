@@ -29,6 +29,7 @@ public class Tipoabogado  implements java.io.Serializable {
      private Set abogadoTipoabogados = new HashSet(0);
 
     public Tipoabogado() {
+        idTipoAbogado = 0;
     }
 
 	

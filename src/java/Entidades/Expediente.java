@@ -2,8 +2,11 @@ package Entidades;
 // Generated 09-09-2013 12:06:13 AM by Hibernate Tools 3.2.1.GA
 
 
+import DAO.Despachos.Expedientes.ExpedientesDAO;
+import DAO.Despachos.Expedientes.ExpedientesDAOimpl;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,8 +39,10 @@ public class Expediente  implements java.io.Serializable {
      private int idJuzgados;
      private int idUsuarios;
      private Set estadoexpedientes = new HashSet(0);
+     private ExpedientesDAO dao;
 
     public Expediente() {
+        dao = new ExpedientesDAOimpl();
     }
 
 	
@@ -143,8 +148,13 @@ public class Expediente  implements java.io.Serializable {
         this.estadoexpedientes = estadoexpedientes;
     }
 
+public List<Expediente> listaExpedientes() {
+        return dao.findAllExpedientes();
+    }
 
-
+    public boolean GuardarExpediente(Expediente entidad) {
+        return dao.Crearexpediente(entidad);
+    }
 
 }
 

@@ -39,9 +39,11 @@ public class Abogados  implements java.io.Serializable {
      private String email;
      private Set abogadoTipoabogados = new HashSet(0);
      private AbogadosDAO dao;
+     private Tipoabogado tipoabogado;
 
     public Abogados() {
         dao = new AbogadosDAOimpl();
+        tipoabogado = new Tipoabogado();
         
     }
 
