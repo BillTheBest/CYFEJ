@@ -4,8 +4,6 @@
  */
 package Beans;
 
-import DAO.Despachos.Personas.PersonasDAO;
-import DAO.Despachos.Personas.PersonasDAOimpl;
 import Entidades.Personas;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -146,28 +144,29 @@ public class personasBean {
 
         if(entidadPersonas.GuardarPersona(entidadPersonas)){
             msg = "Registro Guardado Exitosamente";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             msg = "Error al Insertar los Datos";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
-        FacesContext.getCurrentInstance().addMessage(null, message);
         
     }
     
     public void actualizar(ActionEvent evt){
         
         String msg;
-        PersonasDAO dao = new PersonasDAOimpl();
         
-        if(dao.UpdatePersons(entidadPersonas)){
+        if(entidadPersonas.actualizarPersona(entidadPersonas)){
             msg = "Registro Actualizado Exitosamente";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             msg = "Error al Actualizar los Datos";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
-        FacesContext.getCurrentInstance().addMessage(null, message);
         
     }
     

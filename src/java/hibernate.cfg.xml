@@ -28,5 +28,6 @@
     <mapping resource="Entidades/Juzgados.hbm.xml"/>
     <mapping resource="Entidades/PersonaTipopersona.hbm.xml"/>
     <mapping resource="Entidades/Asuntojudicial.hbm.xml"/>
+    <mapping resource="Entidades/Estado.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -2,7 +2,10 @@ package Entidades;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
 
+import DAO.Despachos.AsuntosJudiciales.TipoAsuntoDAO;
+import DAO.Despachos.AsuntosJudiciales.TipoAsuntoDAOimpl;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,8 +31,11 @@ public class Tipoasunto  implements java.io.Serializable {
      private String descripcion;
      private boolean activo;
      private Set asuntojudicials = new HashSet(0);
+     private TipoAsuntoDAO dao;
 
     public Tipoasunto() {
+        dao = new TipoAsuntoDAOimpl();
+        idTipoAsunto = 0;
     }
 
 	
@@ -80,8 +86,17 @@ public class Tipoasunto  implements java.io.Serializable {
         this.asuntojudicials = asuntojudicials;
     }
 
-
-
+    public boolean guardarTipoAsunto(Tipoasunto entidad){
+        return dao.guardarTipoAsunto(entidad);
+    }
+    
+    public List<Tipoasunto> listaTipoAsunto(){
+        return dao.findAllTipoAsunto();
+    }
+    
+    public boolean actualizarTipoAsunto(Tipoasunto entidad){
+        return dao.actualizarTipoAsunto(entidad);
+    }
 
 }
 

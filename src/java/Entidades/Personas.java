@@ -46,6 +46,19 @@ public class Personas  implements java.io.Serializable {
         dao = new PersonasDAOimpl();
     }
 
+    public Personas(Integer idPersona, String nombrePersona, String primerApellidoPersona, String segundoApellidoPersona, String cedulaPersona, String direccionPersona, int telefonoPersona, int celularPersona, String emailPersona, String observaciones, Set tipoPersona) {
+        this.idPersona = idPersona;
+        this.nombrePersona = nombrePersona;
+        this.primerApellidoPersona = primerApellidoPersona;
+        this.segundoApellidoPersona = segundoApellidoPersona;
+        this.cedulaPersona = cedulaPersona;
+        this.direccionPersona = direccionPersona;
+        this.telefonoPersona = telefonoPersona;
+        this.celularPersona = celularPersona;
+        this.emailPersona = emailPersona;
+        this.observaciones = observaciones;
+        this.personaTipopersonas = tipoPersona;
+    }
 	
     public Personas(String nombrePersona, String primerApellidoPersona, String cedulaPersona, String direccionPersona, int telefonoPersona, int celularPersona, String emailPersona) {
         this.nombrePersona = nombrePersona;
@@ -184,6 +197,10 @@ public class Personas  implements java.io.Serializable {
     
     public boolean GuardarPersona(Personas entidad){
         return dao.CreatePersons(entidad);
+    }
+    
+    public boolean actualizarPersona(Personas entidad){
+        return  dao.UpdatePersons(entidad);
     }
 
 }

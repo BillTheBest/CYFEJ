@@ -1,5 +1,5 @@
 package Entidades;
-// Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
+// Generated 09-09-2013 12:06:13 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -12,9 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,41 +28,37 @@ public class Expediente  implements java.io.Serializable {
 
 
      private Integer idExpediente;
-     private Estadoexpediente estadoexpediente;
-     private Usuarios usuarios;
-     private Asuntojuzgado asuntojuzgado;
      private String descripcion;
      private Date fechaAlta;
      private Date fechaBaja;
      private int anio;
-     private Set facturas = new HashSet(0);
-     private Set detallesexpedientes = new HashSet(0);
-     private Set estadoevolutivos = new HashSet(0);
+     private int idAsuntoJudicial;
+     private int idJuzgados;
+     private int idUsuarios;
+     private Set estadoexpedientes = new HashSet(0);
 
     public Expediente() {
     }
 
 	
-    public Expediente(Estadoexpediente estadoexpediente, Usuarios usuarios, Asuntojuzgado asuntojuzgado, String descripcion, Date fechaAlta, Date fechaBaja, int anio) {
-        this.estadoexpediente = estadoexpediente;
-        this.usuarios = usuarios;
-        this.asuntojuzgado = asuntojuzgado;
+    public Expediente(String descripcion, Date fechaAlta, Date fechaBaja, int anio, int idAsuntoJudicial, int idJuzgados, int idUsuarios) {
         this.descripcion = descripcion;
         this.fechaAlta = fechaAlta;
         this.fechaBaja = fechaBaja;
         this.anio = anio;
+        this.idAsuntoJudicial = idAsuntoJudicial;
+        this.idJuzgados = idJuzgados;
+        this.idUsuarios = idUsuarios;
     }
-    public Expediente(Estadoexpediente estadoexpediente, Usuarios usuarios, Asuntojuzgado asuntojuzgado, String descripcion, Date fechaAlta, Date fechaBaja, int anio, Set facturas, Set detallesexpedientes, Set estadoevolutivos) {
-       this.estadoexpediente = estadoexpediente;
-       this.usuarios = usuarios;
-       this.asuntojuzgado = asuntojuzgado;
+    public Expediente(String descripcion, Date fechaAlta, Date fechaBaja, int anio, int idAsuntoJudicial, int idJuzgados, int idUsuarios, Set estadoexpedientes) {
        this.descripcion = descripcion;
        this.fechaAlta = fechaAlta;
        this.fechaBaja = fechaBaja;
        this.anio = anio;
-       this.facturas = facturas;
-       this.detallesexpedientes = detallesexpedientes;
-       this.estadoevolutivos = estadoevolutivos;
+       this.idAsuntoJudicial = idAsuntoJudicial;
+       this.idJuzgados = idJuzgados;
+       this.idUsuarios = idUsuarios;
+       this.estadoexpedientes = estadoexpedientes;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -77,35 +70,6 @@ public class Expediente  implements java.io.Serializable {
     
     public void setIdExpediente(Integer idExpediente) {
         this.idExpediente = idExpediente;
-    }
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idEstadoExpediente", nullable=false)
-    public Estadoexpediente getEstadoexpediente() {
-        return this.estadoexpediente;
-    }
-    
-    public void setEstadoexpediente(Estadoexpediente estadoexpediente) {
-        this.estadoexpediente = estadoexpediente;
-    }
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idUsuarios", nullable=false)
-    public Usuarios getUsuarios() {
-        return this.usuarios;
-    }
-    
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
-    }
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumns( { 
-        @JoinColumn(name="idAsuntoJudicial", referencedColumnName="idAsuntoJudicial", nullable=false), 
-        @JoinColumn(name="idJuzgados", referencedColumnName="idJuzgados", nullable=false) } )
-    public Asuntojuzgado getAsuntojuzgado() {
-        return this.asuntojuzgado;
-    }
-    
-    public void setAsuntojuzgado(Asuntojuzgado asuntojuzgado) {
-        this.asuntojuzgado = asuntojuzgado;
     }
     
     @Column(name="Descripcion", nullable=false, length=500)
@@ -143,29 +107,40 @@ public class Expediente  implements java.io.Serializable {
     public void setAnio(int anio) {
         this.anio = anio;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="expediente")
-    public Set getFacturas() {
-        return this.facturas;
+    
+    @Column(name="idAsuntoJudicial", nullable=false)
+    public int getIdAsuntoJudicial() {
+        return this.idAsuntoJudicial;
     }
     
-    public void setFacturas(Set facturas) {
-        this.facturas = facturas;
-    }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="expediente")
-    public Set getDetallesexpedientes() {
-        return this.detallesexpedientes;
+    public void setIdAsuntoJudicial(int idAsuntoJudicial) {
+        this.idAsuntoJudicial = idAsuntoJudicial;
     }
     
-    public void setDetallesexpedientes(Set detallesexpedientes) {
-        this.detallesexpedientes = detallesexpedientes;
-    }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="expediente")
-    public Set getEstadoevolutivos() {
-        return this.estadoevolutivos;
+    @Column(name="idJuzgados", nullable=false)
+    public int getIdJuzgados() {
+        return this.idJuzgados;
     }
     
-    public void setEstadoevolutivos(Set estadoevolutivos) {
-        this.estadoevolutivos = estadoevolutivos;
+    public void setIdJuzgados(int idJuzgados) {
+        this.idJuzgados = idJuzgados;
+    }
+    
+    @Column(name="idUsuarios", nullable=false)
+    public int getIdUsuarios() {
+        return this.idUsuarios;
+    }
+    
+    public void setIdUsuarios(int idUsuarios) {
+        this.idUsuarios = idUsuarios;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="expediente")
+    public Set getEstadoexpedientes() {
+        return this.estadoexpedientes;
+    }
+    
+    public void setEstadoexpedientes(Set estadoexpedientes) {
+        this.estadoexpedientes = estadoexpedientes;
     }
 
 

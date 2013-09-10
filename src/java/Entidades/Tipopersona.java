@@ -2,7 +2,10 @@ package Entidades;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
 
+import DAO.Despachos.Personas.TipoPersonasDAO;
+import DAO.Despachos.Personas.TipoPersonasDAOimpl;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,8 +30,10 @@ public class Tipopersona  implements java.io.Serializable {
      private Integer idTipoPersona;
      private String descripcion;
      private Set personaTipopersonas = new HashSet(0);
+     private TipoPersonasDAO dao;
 
     public Tipopersona() {
+        dao = new TipoPersonasDAOimpl();
     }
 
 	
@@ -68,8 +73,9 @@ public class Tipopersona  implements java.io.Serializable {
         this.personaTipopersonas = personaTipopersonas;
     }
 
-
-
+    public List<Tipopersona> listaTipoPersona(){
+        return dao.findAllTipoPersonas();
+    }
 
 }
 
