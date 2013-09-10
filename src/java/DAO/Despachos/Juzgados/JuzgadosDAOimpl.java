@@ -34,7 +34,7 @@ public class JuzgadosDAOimpl implements JuzgadosDAO{
     public List<Juzgados> findAllJuzgados() {
         List<Juzgados> listaJuzgados = null;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String hql = "from Juzgados";
+        String hql = "from Juzgados juz left join fetch juz.departamento";
         try {
             sesion.beginTransaction();
             listaJuzgados = sesion.createQuery(hql).list();
