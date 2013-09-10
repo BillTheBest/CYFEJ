@@ -37,6 +37,7 @@ public class abogadosBean {
     public abogadosBean() {
         entidadAbogados = new Abogados();
     }
+    
 
     public Integer getIdAbogado() {
         return idAbogado;

@@ -12,5 +12,4 @@ public interface AbogadosDAO {
     public List<Abogados> findAllAbogados();
     public boolean Crearabogados(Abogados entidad);
     public boolean actualizarabogados(Abogados entidad);
-    
 }
