@@ -33,12 +33,13 @@
                         <p:menuitem value="Quit" url="#" />  
                     </p:submenu>  
 
-                    <p:submenu label="Edit" icon="ui-icon-pencil">  
-                        <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />  
+                    <p:menuitem value="Agenda" url="#{appBean.urlPath()}frmAgenda.xhtml" />
+<!--                    <p:submenu label="Notas" icon="ui-icon-pencil">  
+                        <p:menuitem value="Agenda" url="#{appBean.urlPath()}frmAgenda.xhtml" />
                         <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />  
-                    </p:submenu>  
+                    </p:submenu>  -->
 
-                    <p:submenu label="Help" icon="ui-icon-help">  
+<!--                    <p:submenu label="Help" icon="ui-icon-help">  
                         <p:menuitem value="Contents" url="#" />  
                         <p:submenu label="Search" icon="ui-icon-search">  
                             <p:submenu label="Text">  
@@ -56,7 +57,7 @@
                         <p:submenu label="Non-Ajax" icon="ui-icon-newwin">  
                             <p:menuitem value="Delete" actionListener="#{menuBean.delete}" icon="ui-icon-close" ajax="false"/>  
                         </p:submenu>  
-                    </p:submenu>
+                    </p:submenu>-->
                     <p:menuitem value="Salir" actionListener="#{loginBean.logout}" icon="ui-icon-close" 
                                 oncomplete="handleLoginRequest(xhr, status, args)" />
                 </p:menubar>
