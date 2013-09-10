@@ -12,6 +12,5 @@ public interface JuzgadosDAO {
     public boolean CrearJuzgados(Juzgados entidad);
     public boolean actualizarjuzgados(Juzgados entidad);
     public List<Juzgados> findAllJuzgados();
-    
 
 }

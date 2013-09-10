@@ -164,7 +164,6 @@ public class Abogados  implements java.io.Serializable {
     public void setAbogadoTipoabogados(Set abogadoTipoabogados) {
         this.abogadoTipoabogados = abogadoTipoabogados;
     }
-    
 
     public List<Abogados> listaAbogados() {
         return dao.findAllAbogados();

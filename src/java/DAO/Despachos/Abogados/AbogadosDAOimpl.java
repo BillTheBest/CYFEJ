@@ -60,5 +60,6 @@ public class AbogadosDAOimpl implements AbogadosDAO{
             sesion.beginTransaction().rollback();
         }
         return bandera;
-    }      
+    }  
+    
 }

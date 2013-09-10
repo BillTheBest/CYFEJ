@@ -42,7 +42,6 @@ public class Juzgados  implements java.io.Serializable {
         dao = new JuzgadosDAOimpl();
         departamento = new Departamento();
     }
-
 	
     public Juzgados(Departamento departamento, String descripcion, String direccion, int telefono) {
         this.departamento = departamento;
