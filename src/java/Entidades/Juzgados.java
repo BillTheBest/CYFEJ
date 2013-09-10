@@ -2,7 +2,10 @@ package Entidades;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
 
+import DAO.Despachos.Juzgados.JuzgadosDAO;
+import DAO.Despachos.Juzgados.JuzgadosDAOimpl;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,8 +36,11 @@ public class Juzgados  implements java.io.Serializable {
      private int telefono;
      private Integer celular;
      private Set asuntojuzgados = new HashSet(0);
+     private JuzgadosDAO dao;
 
     public Juzgados() {
+        dao = new JuzgadosDAOimpl();
+        departamento = new Departamento();
     }
 
 	
@@ -116,9 +122,14 @@ public class Juzgados  implements java.io.Serializable {
     public void setAsuntojuzgados(Set asuntojuzgados) {
         this.asuntojuzgados = asuntojuzgados;
     }
+    
+    public List<Juzgados> listaJuzgados() {
+        return dao.findAllJuzgados();
+    }
 
-
-
+    public boolean GuardarJuzgados(Juzgados entidad) {
+        return dao.CrearJuzgados(entidad);
+    }
 
 }
 

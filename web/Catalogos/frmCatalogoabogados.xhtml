@@ -20,8 +20,8 @@ and open the template in the editor.
                     <p:commandButton id="btnCrearAbogado" value="Crear" update=":frmCrear" oncomplete="dialogAbogadosCrear.show()" icon="icon-crear" title="Crear"/>
                 </h:form>
                 <h:form id="regAbogados">
-                    <p:dataTable var="abogados" value="#{abogadosBean.listaAbogados()}" emptyMessage="Datos no Disponibles" 
-                                 paginator="true" rows="10" paginatorPosition="bottom,top"
+                    <p:dataTable var="abogados" value="#{abogadosBean.listaAbogados()}" emptyMessage="Datos no Disponibles" scrollable="true"
+                                 paginator="true" rows="10"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" editable="true">
                 
@@ -30,63 +30,63 @@ and open the template in the editor.
                         </f:facet>
                      
                         <p:column headerText="Id" style="width:5%; text-align:center">
-                            <f:facet name="output">  
+                            
                                 <h:outputText value="#{abogados.idAbogado}" />
-                            </f:facet>   
+                             
                         </p:column> 
                         
                         <p:column headerText="Nombre" style="width:15%; text-align: center"> 
-                            <f:facet name="output">  
+                          
                                 <h:outputText value="#{abogados.nombre}" />  
-                            </f:facet>   
+                            
                         </p:column>  
                         
                         <p:column headerText="PrimerApellido" style="width:15%; text-align: center"> 
-                            <f:facet name="output">  
+                            
                                 <h:outputText value="#{abogados.primerApellido}" />  
-                            </f:facet>   
+                              
                         </p:column>  
                         
                         <p:column headerText="SegundoApellido" style="width:15%; text-align: center"> 
-                            <f:facet name="output">  
+                           
                                 <h:outputText value="#{abogados.segundoApellido}" />  
-                            </f:facet>   
+                              
                         </p:column> 
                         
                         <p:column headerText="NumCarnet" style="width:15%; text-align: center"> 
-                            <f:facet name="output">  
+                             
                                 <h:outputText value="#{abogados.noCarne}" />  
-                            </f:facet>   
+                               
                         </p:column>
                         
                         <p:column headerText="Cedula" style="width:15%; text-align: center"> 
-                            <f:facet name="output">  
+                             
                                 <h:outputText value="#{abogados.cedula}" />  
-                            </f:facet>   
+                             
                         </p:column> 
                         
                         <p:column headerText="Direccion" style="width:15%; text-align: center"> 
-                         <f:facet name="output">  
+                         
                              <h:outputText value="#{abogados.direccion}" />  
-                         </f:facet>   
+                          
                         </p:column> 
                         
                         <p:column headerText="Telefono" style="width:15%; text-align: center"> 
-                         <f:facet name="output">  
+                          
                              <h:outputText value="#{abogados.telefono}" />  
-                         </f:facet>   
+                          
                         </p:column>
                         
                         <p:column headerText="Celular" style="width:15%; text-align: center"> 
-                         <f:facet name="output">  
+                        
                              <h:outputText value="#{abogados.celular}" />  
-                         </f:facet>   
+                          
                         </p:column>
                         
                         <p:column headerText="Email" style="width:15%; text-align: center"> 
-                         <f:facet name="output">  
+                       
                              <h:outputText value="#{abogados.email}" />  
-                         </f:facet>   
+                         
                         </p:column>
                         
                         <p:column style="width:4%">  

@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.Despachos.Abogados;
+package DAO.Despachos.Juzgados;
 
-import Entidades.Abogados;
+import Entidades.Juzgados;
 import Utilidades.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -13,26 +13,42 @@ import org.hibernate.Session;
  *
  * @author Usuario
  */
-public class AbogadosDAOimpl implements AbogadosDAO{
+public class JuzgadosDAOimpl implements JuzgadosDAO{
 
     @Override
-    public List<Abogados> findAllAbogados() {
-        List<Abogados> listaabogados = null;
+    public boolean actualizarjuzgados(Juzgados entidad) {
+       boolean bandera;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String hql = "from Abogados";
         try {
             sesion.beginTransaction();
-            listaabogados = sesion.createQuery(hql).list();
+            sesion.update(entidad);
+            sesion.beginTransaction().commit();
+            bandera = true;
+        } catch (Exception e) {
+            bandera = false;
+            sesion.beginTransaction().rollback();
+        }
+        return bandera;
+    }  
+    
+    @Override
+    public List<Juzgados> findAllJuzgados() {
+        List<Juzgados> listaJuzgados = null;
+        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        String hql = "from Juzgados";
+        try {
+            sesion.beginTransaction();
+            listaJuzgados = sesion.createQuery(hql).list();
             sesion.beginTransaction().commit();
         }catch (Exception e) {
             sesion.beginTransaction().rollback();
         }
-        return listaabogados;
+        return listaJuzgados;
     }
 
     @Override
-    public boolean Crearabogados(Abogados entidad) {
-        boolean bandera;
+    public boolean CrearJuzgados(Juzgados entidad) {
+         boolean bandera;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             sesion.beginTransaction();
@@ -46,19 +62,4 @@ public class AbogadosDAOimpl implements AbogadosDAO{
         return bandera;
     }
 
-    @Override
-    public boolean actualizarabogados(Abogados entidad) {
-        boolean bandera;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            sesion.beginTransaction();
-            sesion.update(entidad);
-            sesion.beginTransaction().commit();
-            bandera = true;
-        } catch (Exception e) {
-            bandera = false;
-            sesion.beginTransaction().rollback();
-        }
-        return bandera;
-    }      
 }

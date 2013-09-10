@@ -40,6 +40,7 @@ public class abogadosBean {
     }
 
     public Integer getIdAbogado() {
+        
         return idAbogado;
     }
 

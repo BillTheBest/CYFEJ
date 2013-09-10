@@ -29,6 +29,7 @@ public class Departamento  implements java.io.Serializable {
      private Set juzgadoses = new HashSet(0);
 
     public Departamento() {
+        idDepartamento=0;
     }
 
 	
