@@ -6,7 +6,7 @@ package Beans;
 
 import DAO.Despachos.Usuarios.UsuarioDAO;
 import DAO.Despachos.Usuarios.UsuarioDAOimpl;
-import Entidades.Usuarios;
+import Modelos.Usuarios;
 import Utilidades.MyUtil;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;

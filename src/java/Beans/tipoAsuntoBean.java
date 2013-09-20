@@ -4,7 +4,7 @@
  */
 package Beans;
 
-import Entidades.Tipoasunto;
+import Modelos.Tipoasunto;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import javax.faces.model.SelectItem;
 @RequestScoped
 public class tipoAsuntoBean {
 
-    private Integer idTipoAsunto;
+    private Long idTipoAsunto;
     private String descripcion;
     private boolean activo;
     private Tipoasunto entidad;
@@ -32,11 +32,11 @@ public class tipoAsuntoBean {
         entidad = new Tipoasunto();
     }
 
-    public Integer getIdTipoAsunto() {
+    public Long getIdTipoAsunto() {
         return idTipoAsunto;
     }
 
-    public void setIdTipoAsunto(Integer idTipoAsunto) {
+    public void setIdTipoAsunto(Long idTipoAsunto) {
         this.idTipoAsunto = idTipoAsunto;
     }
 

@@ -4,7 +4,7 @@
  */
 package DAO.Despachos.Usuarios;
 
-import Entidades.Usuarios;
+import Modelos.Usuarios;
 import Utilidades.HibernateUtil;
 import org.hibernate.Session;
 
@@ -17,7 +17,7 @@ public class UsuarioDAOimpl implements UsuarioDAO{
     @Override
     public Usuarios findByUsuarios(Usuarios usuario) {
         Usuarios entidad = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session sesion = HibernateUtil.getSessionFactory().openSession();
         String hql = "FROM Usuarios where alias = '"+usuario.getAlias()+"'";
         try {
             sesion.beginTransaction();

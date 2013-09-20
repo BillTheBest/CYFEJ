@@ -31,7 +31,6 @@ public class Factura  implements java.io.Serializable {
 
      private Integer idFactura;
      private Expediente expediente;
-     private Personas personas;
      private Date fechaCreacion;
      private float subtotal;
      private float iva;
@@ -45,9 +44,8 @@ public class Factura  implements java.io.Serializable {
     }
 
 	
-    public Factura(Expediente expediente, Personas personas, Date fechaCreacion, float subtotal, float iva, float total, String medioPago, String estado, boolean activo) {
+    public Factura(Expediente expediente, Date fechaCreacion, float subtotal, float iva, float total, String medioPago, String estado, boolean activo) {
         this.expediente = expediente;
-        this.personas = personas;
         this.fechaCreacion = fechaCreacion;
         this.subtotal = subtotal;
         this.iva = iva;
@@ -56,9 +54,8 @@ public class Factura  implements java.io.Serializable {
         this.estado = estado;
         this.activo = activo;
     }
-    public Factura(Expediente expediente, Personas personas, Date fechaCreacion, float subtotal, float iva, float total, String medioPago, String estado, boolean activo, Set detallefacturas) {
+    public Factura(Expediente expediente, Date fechaCreacion, float subtotal, float iva, float total, String medioPago, String estado, boolean activo, Set detallefacturas) {
        this.expediente = expediente;
-       this.personas = personas;
        this.fechaCreacion = fechaCreacion;
        this.subtotal = subtotal;
        this.iva = iva;
@@ -88,15 +85,7 @@ public class Factura  implements java.io.Serializable {
     public void setExpediente(Expediente expediente) {
         this.expediente = expediente;
     }
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idPersona", nullable=false)
-    public Personas getPersonas() {
-        return this.personas;
-    }
-    
-    public void setPersonas(Personas personas) {
-        this.personas = personas;
-    }
+
     @Temporal(TemporalType.DATE)
     @Column(name="fechaCreacion", nullable=false, length=10)
     public Date getFechaCreacion() {

@@ -4,7 +4,7 @@
  */
 package DAO.Despachos.Usuarios;
 
-import Entidades.Usuarios;
+import Modelos.Usuarios;
 
 /**
  *

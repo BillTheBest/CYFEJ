@@ -4,11 +4,11 @@
  */
 package DAO.Despachos.Personas;
 
-import Entidades.Personas;
+import Modelos.Persona;
 import java.util.List;
 
 public interface PersonasDAO {
-    public List<Personas> findAllPersons();
-    public boolean CreatePersons(Personas entidad);
-    public boolean UpdatePersons(Personas entidad);
+    public List<Persona> findAllPersons();
+    public boolean CreatePersons(Persona entidad, Long idTipoPersona, boolean activo);
+    public boolean UpdatePersons(Persona entidad, Long idTipoPersona, boolean activo);
 }

@@ -4,7 +4,7 @@
  */
 package Beans;
 
-import Entidades.Asuntojudicial;
+import Modelos.Asuntojudicial;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.inject.Named;
@@ -20,7 +20,7 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class asuntoJudicialBean {
 
-    private Integer idAsuntoJudicial;
+    private Long idAsuntoJudicial;
     private String descripcion;
     private boolean activo;
     private Asuntojudicial entidadAsuntojudicial;
@@ -29,11 +29,11 @@ public class asuntoJudicialBean {
         entidadAsuntojudicial = new Asuntojudicial();
     }
 
-    public Integer getIdAsuntoJudicial() {
+    public Long getIdAsuntoJudicial() {
         return idAsuntoJudicial;
     }
 
-    public void setIdAsuntoJudicial(Integer idAsuntoJudicial) {
+    public void setIdAsuntoJudicial(Long idAsuntoJudicial) {
         this.idAsuntoJudicial = idAsuntoJudicial;
     }
 

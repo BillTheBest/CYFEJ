@@ -20,7 +20,7 @@
                 </center>
                 <br/>
                 <h:form id="regPersonas">
-                    <p:dataTable var="persona" value="#{personasBean.listaPersonas()}" emptyMessage="Datos no Disponibles" 
+                    <p:dataTable var="ptp" value="#{ptpBean.listaPTP()}" emptyMessage="Datos no Disponibles" 
                                  paginator="true" rows="10"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" editable="true">
@@ -30,40 +30,49 @@
                         </f:facet>
 
                         <p:column headerText="Nombre" style="width:15%; text-align: center"> 
-                            <h:outputText value="#{persona.nombrePersona}" /> 
+                            <h:outputText value="#{ptp.persona.nombrePersona}" /> 
                         </p:column>  
 
                         <p:column headerText="Primer Apellido" style="width:15%; text-align: center"> 
-                            <h:outputText value="#{persona.primerApellidoPersona}" />
-                        </p:column>  
-
-                        <p:column headerText="Segundo Apellido" style="width:15%; text-align: center">
-                            <h:outputText value="#{persona.segundoApellidoPersona}" />  
-                        </p:column>  
+                            <h:outputText value="#{ptp.persona.primerApellido}" />
+                        </p:column>
+                        
+<!--                        <p:column headerText="Tipo Persona" style="text-align: center">
+                            <h:outputText value="#{persona}"/>
+                        </p:column>-->
 
                         <p:column headerText="Cedula" style="width:15%; text-align: center">  
-                            <h:outputText value="#{persona.cedulaPersona}" />
+                            <h:outputText value="#{ptp.persona.cedulaPersona}" />
                         </p:column>  
 
                         <p:column headerText="Direccion" style="width:20%; text-align: center">
-                            <h:outputText value="#{persona.direccionPersona}" />
+                            <h:outputText value="#{ptp.persona.direccion}" />
                         </p:column>
 
                         <p:column headerText="Telefono" style="width:15%; text-align: center">  
-                            <h:outputText value="#{persona.telefonoPersona}" />
+                            <h:outputText value="#{ptp.persona.telefono}" />
                         </p:column>  
 
                         <p:column headerText="Celular" style="width:15%; text-align: center"> 
-                            <h:outputText value="#{persona.celularPersona}" /> 
+                            <h:outputText value="#{ptp.persona.celular}" /> 
                         </p:column>  
 
                         <p:column headerText="Email" style="width:20%; text-align: center">  
-                            <h:outputText value="#{persona.emailPersona}" />
+                            <h:outputText value="#{ptp.persona.email}" />
+                        </p:column>
+
+                        <p:column headerText="Tipo" style="width:20%; text-align: center">  
+                            <h:outputText value="#{ptp.tipoPersona.descripcion}" />
+                        </p:column>
+                        
+                        <p:column headerText="Activo" style="text-align: center">
+                            <!--<p:selectBooleanCheckbox value="#{ptp.activo}"/>-->
+                            <input type="image" src="#{appBean.urlBase()}resources/images/icons/userActive.png" disabled="#{ptp.activo}"/>
                         </p:column>
 
                         <p:column style="width:4%">  
                             <p:commandButton id="selectButton" update=":frmActualizar" oncomplete="dialogPersonaActualizar.show()" icon="icon-editar" title="Editar">  
-                                <f:setPropertyActionListener value="#{persona}" target="#{personasBean.entidadPersonas}" />  
+                                <f:setPropertyActionListener value="#{ptp}" target="#{ptpBean.entidadPTP}" />  
                             </p:commandButton>  
                         </p:column>
                     </p:dataTable> 
@@ -95,7 +104,7 @@
                             <p:inputText value="#{personasBean.direccionPersona}" style="font-weight:bold"/> 
                             
                             <h:outputText value="Tipo Persona:" />  
-                            <p:selectOneMenu id="cboTipoPersona" value="#">
+                            <p:selectOneMenu id="cboTipoPersona" value="#{personasBean.idTipoPersona}">
                                 <f:selectItem itemLabel="- Seleccione -" itemValue=""/>
                                 <f:selectItems value="#{tipoPersonaBean.listaPersonas}"/>
                             </p:selectOneMenu>
@@ -113,9 +122,9 @@
                             <p:inputText value="#{personasBean.observaciones}" style="font-weight:bold"/>
                             
                             <h:outputText value="Estado:" />  
-                            <p:selectOneMenu id="cboActivo" value="#">
-                                <f:selectItem itemLabel="Activo" itemValue="1"/>
-                                <f:selectItem itemLabel="Inactivo" itemValue="0"/>
+                            <p:selectOneMenu id="cboActivo" value="#{personasBean.activo}">
+                                <f:selectItem itemLabel="Activo" itemValue="true"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="false"/>
                             </p:selectOneMenu>
                             
                             <f:facet name="footer">
@@ -140,34 +149,45 @@
 
                         <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
                             <!--<h:outputText value="ID:" />-->  
-                            <h:inputHidden value="#{personasBean.entidadPersonas.idPersona}"/>  
+                            <h:inputHidden value="#{ptpBean.entidadPTP.persona.idPersona}"/>  
 
                             <h:outputText value="Nombre:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.nombrePersona}" style="font-weight:bold"/>  
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.nombrePersona}" style="font-weight:bold"/>  
 
                             <h:outputText value="Primer Apellido:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.primerApellidoPersona}" style="font-weight:bold"/>
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.primerApellido}" style="font-weight:bold"/>
                             
                             <h:outputText value="Segundo Apellido:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.segundoApellidoPersona}" style="font-weight:bold"/>
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.segundoApellido}" style="font-weight:bold"/>
                             
                             <h:outputText value="Cedula:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.cedulaPersona}" style="font-weight:bold"/>
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.cedulaPersona}" style="font-weight:bold"/>
 
                             <h:outputText value="Direccion:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.direccionPersona}" style="font-weight:bold"/> 
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.direccion}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Tipo Persona:" />  
+                            <p:selectOneMenu id="cboTipoPersona" value="#{personasBean.idTipoPersona}">
+                                <f:selectItems value="#{tipoPersonaBean.listaPersonas}"/>
+                            </p:selectOneMenu>
                             
                             <h:outputText value="Telefono:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.telefonoPersona}" style="font-weight:bold"/>  
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.telefono}" style="font-weight:bold"/>  
 
                             <h:outputText value="Celular:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.celularPersona}" style="font-weight:bold"/>  
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.celular}" style="font-weight:bold"/>  
 
                             <h:outputText value="Correo:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.emailPersona}" style="font-weight:bold"/>  
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.email}" style="font-weight:bold"/>  
 
                             <h:outputText value="Observaciones:" />  
-                            <p:inputText value="#{personasBean.entidadPersonas.observaciones}" style="font-weight:bold"/>
+                            <p:inputText value="#{ptpBean.entidadPTP.persona.observaciones}" style="font-weight:bold"/>
+                            
+                            <h:outputText value="Estado:" />  
+                            <p:selectOneMenu id="cboActivo" value="#{ptpBean.entidadPTP.activo}">
+                                <f:selectItem itemLabel="Activo" itemValue="true"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="false"/>
+                            </p:selectOneMenu>
                             
                             <f:facet name="footer">
                                 <p:separator/>

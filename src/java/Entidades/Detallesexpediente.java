@@ -24,16 +24,16 @@ public class Detallesexpediente  implements java.io.Serializable {
      private int idExpediente;
      private Expediente expediente;
      private AbogadoTipoabogado abogadoTipoabogado;
-     private PersonaTipopersona personaTipopersona;
+     //private PersonaTipopersona personaTipopersona;
 
     public Detallesexpediente() {
     }
 
-    public Detallesexpediente(int idExpediente, Expediente expediente, AbogadoTipoabogado abogadoTipoabogado, PersonaTipopersona personaTipopersona) {
+    public Detallesexpediente(int idExpediente, Expediente expediente, AbogadoTipoabogado abogadoTipoabogado) {
        this.idExpediente = idExpediente;
        this.expediente = expediente;
        this.abogadoTipoabogado = abogadoTipoabogado;
-       this.personaTipopersona = personaTipopersona;
+       //this.personaTipopersona = personaTipopersona;
     }
    
      @Id 
@@ -66,21 +66,4 @@ public class Detallesexpediente  implements java.io.Serializable {
     public void setAbogadoTipoabogado(AbogadoTipoabogado abogadoTipoabogado) {
         this.abogadoTipoabogado = abogadoTipoabogado;
     }
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumns( { 
-        @JoinColumn(name="idPersona", referencedColumnName="idPersona", nullable=false), 
-        @JoinColumn(name="idTipoPersona", referencedColumnName="idTipoPersona", nullable=false) } )
-    public PersonaTipopersona getPersonaTipopersona() {
-        return this.personaTipopersona;
-    }
-    
-    public void setPersonaTipopersona(PersonaTipopersona personaTipopersona) {
-        this.personaTipopersona = personaTipopersona;
-    }
-
-
-
-
 }
-
-

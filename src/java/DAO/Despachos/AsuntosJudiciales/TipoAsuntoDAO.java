@@ -4,7 +4,7 @@
  */
 package DAO.Despachos.AsuntosJudiciales;
 
-import Entidades.Tipoasunto;
+import Modelos.Tipoasunto;
 import java.util.List;
 
 /**

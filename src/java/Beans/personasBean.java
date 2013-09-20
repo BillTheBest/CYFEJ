@@ -4,7 +4,7 @@
  */
 package Beans;
 
-import Entidades.Personas;
+import Modelos.Persona;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.inject.Named;
@@ -20,7 +20,8 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class personasBean {
 
-    private Integer idPersona;
+    private Long idPersona;
+    private Long idTipoPersona;
     private String nombrePersona;
     private String primerApellidoPersona;
     private String segundoApellidoPersona;
@@ -30,17 +31,34 @@ public class personasBean {
     private int celularPersona;
     private String emailPersona;
     private String observaciones;
-    private Personas entidadPersonas;
+    private boolean activo;
+    private Persona entidadPersonas;
     
     public personasBean() {
-        entidadPersonas = new Personas();
+        entidadPersonas = new Persona();
     }
 
-    public Integer getIdPersona() {
+    public Long getIdTipoPersona() {
+        return idTipoPersona;
+    }
+
+    public void setIdTipoPersona(Long idTipoPersona) {
+        this.idTipoPersona = idTipoPersona;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public Long getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(Integer idPersona) {
+    public void setIdPersona(Long idPersona) {
         this.idPersona = idPersona;
     }
 
@@ -116,16 +134,17 @@ public class personasBean {
         this.observaciones = observaciones;
     }
     
-    public Personas getEntidadPersonas() {
+    public Persona getEntidadPersonas() {
         return entidadPersonas;
     }
 
-    public void setEntidadPersonas(Personas entidadPersonas) {
+    public void setEntidadPersonas(Persona entidadPersonas) {
         this.entidadPersonas = entidadPersonas;
     }
     
-    public List<Personas> listaPersonas(){
+    public List<Persona> listaPersonas(){
         return entidadPersonas.listaPersonas();
+        //return null;
     }
     
     public void guardar(ActionEvent evt){
@@ -133,16 +152,16 @@ public class personasBean {
         String msg;
         entidadPersonas.setIdPersona(this.getIdPersona());
         entidadPersonas.setNombrePersona(this.getNombrePersona());
-        entidadPersonas.setPrimerApellidoPersona(this.getPrimerApellidoPersona());
-        entidadPersonas.setSegundoApellidoPersona(this.getSegundoApellidoPersona());
+        entidadPersonas.setPrimerApellido(this.getPrimerApellidoPersona());
+        entidadPersonas.setSegundoApellido(this.getSegundoApellidoPersona());
         entidadPersonas.setCedulaPersona(this.getCedulaPersona());
-        entidadPersonas.setDireccionPersona(this.getDireccionPersona());
-        entidadPersonas.setTelefonoPersona(this.getTelefonoPersona());
-        entidadPersonas.setCelularPersona(this.getCelularPersona());
-        entidadPersonas.setEmailPersona(this.getEmailPersona());
+        entidadPersonas.setDireccion(this.getDireccionPersona());
+        entidadPersonas.setTelefono(this.getTelefonoPersona());
+        entidadPersonas.setCelular(this.getCelularPersona());
+        entidadPersonas.setEmail(this.getEmailPersona());
         entidadPersonas.setObservaciones(this.getObservaciones());
 
-        if(entidadPersonas.GuardarPersona(entidadPersonas)){
+        if(entidadPersonas.GuardarPersona(entidadPersonas, getIdTipoPersona(), isActivo())){
             msg = "Registro Guardado Exitosamente";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -158,7 +177,7 @@ public class personasBean {
         
         String msg;
         
-        if(entidadPersonas.actualizarPersona(entidadPersonas)){
+        if(entidadPersonas.actualizarPersona(entidadPersonas, getIdTipoPersona(), isActivo())){
             msg = "Registro Actualizado Exitosamente";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);

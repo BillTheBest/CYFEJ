@@ -4,7 +4,9 @@
  */
 package DAO.Despachos.Personas;
 
-import Entidades.Personas;
+import Modelos.Persona;
+import Modelos.PersonaTipoPersona;
+import Modelos.TipoPersona;
 import Utilidades.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -16,10 +18,10 @@ import org.hibernate.Session;
 public class PersonasDAOimpl implements PersonasDAO{
 
     @Override
-    public List<Personas> findAllPersons() {
-        List<Personas> listaPersonas = null;
+    public List<Persona> findAllPersons() {
+        List<Persona> listaPersonas = null;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String hql = "from Personas";
+        String hql = "from Persona p left join fetch p.ptp";
         try {
             sesion.beginTransaction();
             listaPersonas = sesion.createQuery(hql).list();
@@ -31,13 +33,20 @@ public class PersonasDAOimpl implements PersonasDAO{
     }
 
     @Override
-    public boolean CreatePersons(Personas entidad) {
+    public boolean CreatePersons(Persona entidad, Long idTipoPersona, boolean activo) {
         boolean bandera;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session sesion = HibernateUtil.getSessionFactory().openSession();
         try {
             sesion.beginTransaction();
+            TipoPersona tp = (TipoPersona) sesion.get(TipoPersona.class, idTipoPersona);
+            PersonaTipoPersona ptp = new PersonaTipoPersona();
+            ptp.setPersona(entidad);
+            ptp.setTipoPersona(tp);
+            ptp.setActivo(activo);
+            entidad.getPtp().add(ptp);
             sesion.save(entidad);
             sesion.beginTransaction().commit();
+            sesion.close();
             bandera = true;
         } catch (Exception e) {
             bandera = false;
@@ -47,11 +56,17 @@ public class PersonasDAOimpl implements PersonasDAO{
     }
 
     @Override
-    public boolean UpdatePersons(Personas entidad) {
+    public boolean UpdatePersons(Persona entidad, Long idTipoPersona, boolean activo) {
         boolean bandera;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             sesion.beginTransaction();
+            TipoPersona tp = (TipoPersona) sesion.get(TipoPersona.class, idTipoPersona);
+            PersonaTipoPersona ptp = new PersonaTipoPersona();
+            ptp.setPersona(entidad);
+            ptp.setTipoPersona(tp);
+            ptp.setActivo(activo);
+            entidad.getPtp().add(ptp);
             sesion.update(entidad);
             sesion.beginTransaction().commit();
             bandera = true;

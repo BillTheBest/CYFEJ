@@ -4,17 +4,13 @@
  */
 package DAO.Despachos.Personas;
 
-import Modelos.TipoPersona;
+import Modelos.PersonaTipoPersona;
 import java.util.List;
 
 /**
  *
  * @author Tellin
  */
-public interface TipoPersonasDAO {
-    
-    public List<TipoPersona> findAllTipoPersonas();
-    
-    public TipoPersona findbyID(Long id);
-    
+public interface ptpDAO {
+    public List<PersonaTipoPersona> listaPTP();
 }

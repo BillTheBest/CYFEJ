@@ -2,6 +2,7 @@ package Entidades;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
 
+import Modelos.Asuntojudicial;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.AttributeOverride;

@@ -4,7 +4,7 @@
  */
 package Beans;
 
-import Entidades.Tipopersona;
+import Modelos.TipoPersona;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
@@ -19,17 +19,17 @@ import javax.faces.model.SelectItem;
 @RequestScoped
 public class tipoPersonaBean {
 
-    private Tipopersona entidad;
+    private TipoPersona entidad;
     private List<SelectItem> listaPersonas;
     
     public tipoPersonaBean() {
-        entidad = new Tipopersona();
+        entidad = new TipoPersona();
     }
 
     public List<SelectItem> getListaPersonas() {
         listaPersonas = new ArrayList<SelectItem>();
-        List<Tipopersona> lista = entidad.listaTipoPersona();
-        for (Tipopersona tipopersona : lista) {
+        List<TipoPersona> lista = entidad.listaTipoPersona();
+        for (TipoPersona tipopersona : lista) {
             SelectItem item = new SelectItem(tipopersona.getIdTipoPersona(), tipopersona.getDescripcion());
             listaPersonas.add(item);
         }
