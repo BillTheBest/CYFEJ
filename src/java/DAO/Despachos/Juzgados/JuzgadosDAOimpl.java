@@ -4,7 +4,7 @@
  */
 package DAO.Despachos.Juzgados;
 
-import Entidades.Juzgados;
+import Modelos.Juzgados;
 import Utilidades.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -31,7 +31,7 @@ public class JuzgadosDAOimpl implements JuzgadosDAO{
     }  
     
     @Override
-    public List<Juzgados> findAllJuzgados() {
+    public List<Juzgados> listaJuzgados() {
         List<Juzgados> listaJuzgados = null;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         String hql = "from Juzgados juz left join fetch juz.departamento";

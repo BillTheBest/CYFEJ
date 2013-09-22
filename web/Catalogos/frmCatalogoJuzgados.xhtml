@@ -15,9 +15,13 @@ and open the template in the editor.
             <ui:define name="title">Catálogo de Juzgados</ui:define>
             <ui:define name="content">
                 <p:growl id="msgs" showDetail="true" />
+                <br/>
+                    <center>
                  <h:form>
                     <p:commandButton id="btnCrearJuzgados" value="Crear" update=":frmCrear" oncomplete="dialogJuzgadosCrear.show()" icon="icon-crear" title="Crear"/>
                 </h:form>
+                    </center>
+                <br/>
                 <h:form id="regJuzgados">
                     <p:dataTable var="juzgados" value="#{juzgadosBean.listaJuzgados()}" emptyMessage="Datos no Disponibles" 
                                  paginator="true" rows="10" 
@@ -29,7 +33,7 @@ and open the template in the editor.
                         </f:facet>
                                                
                         <p:column headerText="Departamento" style="width:15%; text-align: center"> 
-                             
+                            
                             <h:outputText value="#{juzgados.departamento.nombreDepartamento}" />  
                              
                         </p:column>  

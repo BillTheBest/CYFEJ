@@ -4,13 +4,13 @@
  */
 package DAO.Despachos.Juzgados;
 
-import Entidades.Juzgados;
+import Modelos.Juzgados;
 import java.util.List;
 
 public interface JuzgadosDAO {
 
     public boolean CrearJuzgados(Juzgados entidad);
     public boolean actualizarjuzgados(Juzgados entidad);
-    public List<Juzgados> findAllJuzgados();
+    public List<Juzgados> listaJuzgados();
     
 }

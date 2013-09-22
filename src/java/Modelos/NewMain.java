@@ -50,32 +50,39 @@ public class NewMain {
 //        
 //        aj.setTipoasunto(ta); 
 //        ta.getAsuntojudiciales().add(aj);
-//        
+        
+        /*Creacion Departamentos*/
+        Departamento dep = new Departamento();
+        
+        dep.setNombreDepartamento("Boaco");
+        sesion.save(dep);
+        
+        
 //        sesion.save(aj);
-        Persona persona1 = new Persona();
-        
-        persona1.setNombrePersona("Francis");
-        persona1.setPrimerApellido("Castillo");
-        persona1.setSegundoApellido("Salgado");
-        persona1.setCedulaPersona("001-230389-0064X" );
-        persona1.setDireccion("Loma Linda");
-        persona1.setTelefono(22222222);
-        persona1.setCelular(88888888);
-        persona1.setEmail("dalila@gmail.com");
-        persona1.setObservaciones("ninguna");
-        
-        TipoPersona tp = new TipoPersona();
-        tp.setDescripcion("Demandante");
-        sesion.save(tp);
-        
-        PersonaTipoPersona ptp = new PersonaTipoPersona();
-        ptp.setPersona(persona1);
-        ptp.setTipoPersona(tp);
-        ptp.setActivo(true);
-        
-        persona1.getPtp().add(ptp);
-                
-        sesion.save(persona1);
+//        Persona persona1 = new Persona();
+//        
+//        persona1.setNombrePersona("Francis");
+//        persona1.setPrimerApellido("Castillo");
+//        persona1.setSegundoApellido("Salgado");
+//        persona1.setCedulaPersona("001-230389-0064X" );
+//        persona1.setDireccion("Loma Linda");
+//        persona1.setTelefono(22222222);
+//        persona1.setCelular(88888888);
+//        persona1.setEmail("dalila@gmail.com");
+//        persona1.setObservaciones("ninguna");
+//        
+//        TipoPersona tp = new TipoPersona();
+//        tp.setDescripcion("Demandante");
+//        sesion.save(tp);
+//        
+//        PersonaTipoPersona ptp = new PersonaTipoPersona();
+//        ptp.setPersona(persona1);
+//        ptp.setTipoPersona(tp);
+//        ptp.setActivo(true);
+//        
+//        persona1.getPtp().add(ptp);
+//                
+//        sesion.save(persona1);
         
         sesion.beginTransaction().commit();
         sesion.close();

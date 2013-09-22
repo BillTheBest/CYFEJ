@@ -6,7 +6,7 @@ package Beans;
 
 import DAO.Despachos.Juzgados.JuzgadosDAO;
 import DAO.Despachos.Juzgados.JuzgadosDAOimpl;
-import Entidades.Juzgados;
+import Modelos.Juzgados;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.inject.Named;
@@ -22,7 +22,7 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class juzgadosBean {
     
-     private Integer idJuzgados;
+     private Long idJuzgados;
      private String descripcion;
      private String direccion;
      private int telefono;
@@ -34,11 +34,11 @@ public class juzgadosBean {
         entidadJuzgados = new Juzgados();
     }
 
-    public Integer getIdJuzgados() {
+    public Long getIdJuzgados() {
         return idJuzgados;
     }
 
-    public void setIdJuzgados(Integer idJuzgados) {
+    public void setIdJuzgados(Long idJuzgados) {
         this.idJuzgados = idJuzgados;
     }
 
