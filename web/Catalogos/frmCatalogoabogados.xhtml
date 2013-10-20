@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -15,11 +11,15 @@ and open the template in the editor.
             <ui:define name="title">Catálogo de Abogados</ui:define>
             <ui:define name="content">
                 <p:growl id="msgs" showDetail="true" />
-                 <h:form>
-                    <p:commandButton id="btnCrearAbogado" value="Crear" update=":frmCrear" oncomplete="dialogAbogadosCrear.show()" icon="icon-crear" title="Crear"/>
-                </h:form>
+                <br/>
+                <center>
+                    <h:form>
+                        <p:commandButton id="btnCrearAbogado" value="Crear" update=":frmCrear" oncomplete="dialogAbogadosCrear.show()" icon="icon-crear" title="Crear"/>
+                    </h:form>
+                </center>
+                <br/>
                 <h:form id="regAbogados">
-                    <p:dataTable var="abogados" value="#{abogadosBean.listaAbogados()}" emptyMessage="Datos no Disponibles" scrollable="true"
+                    <p:dataTable var="ata" value="#{ataBean.listaATA()}" emptyMessage="Datos no Disponibles" 
                                  paginator="true" rows="10"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" editable="true">
@@ -28,55 +28,54 @@ and open the template in the editor.
                             Registro de Abogados
                         </f:facet>
                      
-                        <p:column headerText="Id" style="width:5%; text-align:center">
-                                <h:outputText value="#{abogados.idAbogado}" />
-                        </p:column> 
-                        
                         <p:column headerText="Nombre" style="width:15%; text-align: center"> 
-                                <h:outputText value="#{abogados.nombre}" />  
+                            <h:outputText value="#{ata.abogados.nombre}" />  
                         </p:column>  
                         
                         <p:column headerText="PrimerApellido" style="width:15%; text-align: center"> 
-                                <h:outputText value="#{abogados.primerApellido}" /> 
+                            <h:outputText value="#{ata.abogados.primerApellido}" /> 
                         </p:column>  
                         
                         <p:column headerText="SegundoApellido" style="width:15%; text-align: center"> 
-                                <h:outputText value="#{abogados.segundoApellido}" /> 
+                            <h:outputText value="#{ata.abogados.segundoApellido}" /> 
                         </p:column> 
                         
                         <p:column headerText="NumCarnet" style="width:15%; text-align: center">
-                                <h:outputText value="#{abogados.noCarne}" /> 
+                            <h:outputText value="#{ata.abogados.noCarne}" /> 
                         </p:column>
                         
                         <p:column headerText="Cedula" style="width:15%; text-align: center">
-                                <h:outputText value="#{abogados.cedula}" /> 
+                            <h:outputText value="#{ata.abogados.cedula}" /> 
                         </p:column> 
                         
                         <p:column headerText="Direccion" style="width:15%; text-align: center">
-                             <h:outputText value="#{abogados.direccion}" /> 
+                            <h:outputText value="#{ata.abogados.direccion}" /> 
                         </p:column> 
                         
                         <p:column headerText="Telefono" style="width:15%; text-align: center"> 
-                             <h:outputText value="#{abogados.telefono}" />  
+                            <h:outputText value="#{ata.abogados.telefono}" />  
                         </p:column>
                         
                         <p:column headerText="Celular" style="width:15%; text-align: center"> 
-                             <h:outputText value="#{abogados.celular}" />  
+                            <h:outputText value="#{ata.abogados.celular}" />  
                         </p:column>
                         
                         <p:column headerText="Email" style="width:15%; text-align: center">
-                             <h:outputText value="#{abogados.email}" /> 
+                            <h:outputText value="#{ata.abogados.email}" /> 
                         </p:column>
                         
-<!--                        <p:column headerText="Tipo de abogado" style="width:15%; text-align: center"> 
-                             
-                            <h:outputText value="#{abogados.abogadoTipoabogados}" />  
-                             
-                        </p:column>  -->
+                        <p:column headerText="Tipo de abogado" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ata.tipoabogado.descripcion}" />  
+                        </p:column>  
+                        
+                        <p:column headerText="Activo" style="text-align: center">
+                            <!--<p:selectBooleanCheckbox value="#{ata.activo}"/>-->
+                            <input type="image" src="#{appBean.urlBase()}resources/images/icons/userActive.png" disabled="#{ata.activo}"/>
+                        </p:column>
                         
                         <p:column style="width:4%">  
                             <p:commandButton id="selectButton" update=":frmActualizar" oncomplete="dialogAbogadosActualizar.show()" icon="icon-editar" title="Editar">  
-                                <f:setPropertyActionListener value="#{abogados}" target="#{abogadosBean.entidadAbogados}" />  
+                                <f:setPropertyActionListener value="#{ata}" target="#{ataBean.entidadATA}" />  
                             </p:commandButton>  
                         </p:column>
                     </p:dataTable> 
@@ -87,9 +86,9 @@ and open the template in the editor.
                     <p:dialog header="Crear" widgetVar="dialogAbogadosCrear" resizable="false" id="perDlgCrear"  
                               showEffect="fade" hideEffect="explode" modal="false">  
 
-                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-                            <h:outputText value="ID:" />  
-                            <p:inputText value="#{abogadosBean.idAbogado}" style="font-weight:bold" readonly="true"/>  
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;"> 
+                            <!--<h:outputText value="ID:" />-->  
+                            <h:inputHidden value="#{abogadosBean.idAbogado}"/>   
 
                             <h:outputText value="Nombre:" />  
                             <p:inputText value="#{abogadosBean.nombre}" style="font-weight:bold"/>  
@@ -118,15 +117,17 @@ and open the template in the editor.
                             <h:outputText value="Email:" />  
                             <p:inputText value="#{abogadosBean.email}" style="font-weight:bold"/>  
                             
-<!--                            <h:outputText value="Tipo de abogado:" />  
-                            <p:selectOneMenu id="cboTipoAbogado" 
-                                             value="#{abogadosBean.entidadAbogados.abogadoTipoabogados}">  
-                                <f:selectItem itemLabel="Seleccione" itemValue=""/>
-                                <f:selectItem itemLabel="Abogados" itemValue="1"/>
-                                <f:selectItem itemLabel="Procurador" itemValue="2"/>
-                              
-                            </p:selectOneMenu>-->
-
+                            <h:outputText value="Tipo Abogado:" />  
+                            <p:selectOneMenu id="cboTipoAbogado" value="#{abogadosBean.idTipoAbogado}">
+                                <f:selectItem itemLabel="- Seleccione -" itemValue=""/>
+                                <f:selectItems value="#{tipoAbogadoBean.listaAbogados}"/>
+                            </p:selectOneMenu>
+                            
+                            <h:outputText value="Estado:" />  
+                            <p:selectOneMenu id="cboActivo" value="#{abogadosBean.activo}">
+                                <f:selectItem itemLabel="Activo" itemValue="true"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="false"/>
+                            </p:selectOneMenu>
                                                       
                             <f:facet name="footer">
                                 <p:separator/>
@@ -145,44 +146,46 @@ and open the template in the editor.
                     <p:dialog header="Editar" widgetVar="dialogAbogadosActualizar" resizable="false" id="perDlgActualizar"  
                               showEffect="fade" hideEffect="explode" modal="false">  
 
-                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-                            <h:outputText value="ID:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.idAbogado}" style="font-weight:bold"/>  
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;"> 
+                            <p:inputText value="#{ataBean.entidadATA.abogados.idAbogado}" style="font-weight:bold"/>  
 
                             <h:outputText value="Nombre:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.nombre}" style="font-weight:bold"/>  
+                            <p:inputText value="#{ataBean.entidadATA.abogados.nombre}" style="font-weight:bold"/>  
 
                             <h:outputText value="Primer Apellido:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.primerApellido}" style="font-weight:bold"/>
+                            <p:inputText value="#{ataBean.entidadATA.abogados.primerApellido}" style="font-weight:bold"/>
                             
                             <h:outputText value="Segundo Apellido:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.segundoApellido}" style="font-weight:bold"/>
+                            <p:inputText value="#{ataBean.entidadATA.abogados.segundoApellido}" style="font-weight:bold"/>
                             
                             <h:outputText value="NumCarnet:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.noCarne}" style="font-weight:bold"/>
+                            <p:inputText value="#{ataBean.entidadATA.abogados.noCarne}" style="font-weight:bold"/>
                             
                             <h:outputText value="Cedula:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.cedula}" style="font-weight:bold"/>
+                            <p:inputText value="#{ataBean.entidadATA.abogados.cedula}" style="font-weight:bold"/>
 
                             <h:outputText value="Direccion:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.direccion}" style="font-weight:bold"/> 
+                            <p:inputText value="#{ataBean.entidadATA.abogados.direccion}" style="font-weight:bold"/> 
                             
                             <h:outputText value="Telefono:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.telefono}" style="font-weight:bold"/>  
+                            <p:inputText value="#{ataBean.entidadATA.abogados.telefono}" style="font-weight:bold"/>  
 
                             <h:outputText value="Celular:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.celular}" style="font-weight:bold"/>  
+                            <p:inputText value="#{ataBean.entidadATA.abogados.celular}" style="font-weight:bold"/>  
 
                             <h:outputText value="Email:" />  
-                            <p:inputText value="#{abogadosBean.entidadAbogados.email}" style="font-weight:bold"/>
+                            <p:inputText value="#{ataBean.entidadATA.abogados.email}" style="font-weight:bold"/>
                             
-<!--                            <h:outputText value="Tipo de abogado:" />  
-                            <p:selectOneMenu id="cboTipoAbogado"  value="">  
-                                <f:selectItem itemLabel="Seleccione" itemValue=""/>
-                                <f:selectItem itemLabel="Abogados" itemValue="1"/>
-                                <f:selectItem itemLabel="Procurador" itemValue="2"/>
-                              
-                            </p:selectOneMenu>-->
+                            <h:outputText value="Tipo Abogado:" />  
+                            <p:selectOneMenu id="cboTipoAbogado" value="#{abogadosBean.idTipoAbogado}">
+                                <f:selectItems value="#{tipoPersonaBean.listaPersonas}"/>
+                            </p:selectOneMenu>
+                            
+                            <h:outputText value="Estado:" />  
+                            <p:selectOneMenu id="cboActivo" value="#{ataBean.entidadATA.activo}">
+                                <f:selectItem itemLabel="Activo" itemValue="true"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="false"/>
+                            </p:selectOneMenu>
                             
                             <f:facet name="footer">
                                 <p:separator/>

@@ -4,9 +4,7 @@
  */
 package Beans;
 
-import DAO.Despachos.Abogados.AbogadosDAO;
-import DAO.Despachos.Abogados.AbogadosDAOimpl;
-import Entidades.Abogados;
+import Modelos.Abogados;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.inject.Named;
@@ -22,28 +20,45 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class abogadosBean {
 
-    private Integer idAbogado;
+    private Long idAbogado;
+    private Long idTipoAbogado;
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
     private String noCarne;
     private String cedula;
     private String direccion;
-    private Integer telefono;
-    private Integer celular;
+    private int telefono;
+    private int celular;
     private String email;
+    private boolean activo;
     private Abogados entidadAbogados;    
     
     public abogadosBean() {
         entidadAbogados = new Abogados();
     }
-    
 
-    public Integer getIdAbogado() {
+    public Long getIdTipoAbogado() {
+        return idTipoAbogado;
+    }
+
+    public void setIdTipoAbogado(Long idTipoAbogado) {
+        this.idTipoAbogado = idTipoAbogado;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    public Long getIdAbogado() {
         return idAbogado;
     }
 
-    public void setIdAbogado(Integer idAbogado) {
+    public void setIdAbogado(Long idAbogado) {
         this.idAbogado = idAbogado;
     }
 
@@ -95,19 +110,19 @@ public class abogadosBean {
         this.direccion = direccion;
     }
 
-    public Integer getTelefono() {
+      public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
-    public Integer getCelular() {
+    public int getCelular() {
         return celular;
     }
 
-    public void setCelular(Integer celular) {
+    public void setCelular(int celular) {
         this.celular = celular;
     }
 
@@ -128,14 +143,13 @@ public class abogadosBean {
     }
     
     public List<Abogados> listaAbogados(){
-    
-        return entidadAbogados.listaAbogados();
+        return entidadAbogados.listaabogados();
     }
    
     public void guardar(ActionEvent evt) {
     
         String msg;
-        entidadAbogados.setIdAbogado(this.getIdAbogado());
+        entidadAbogados.setIdAbogado(this.getIdAbogado());        
         entidadAbogados.setNombre(this.getNombre());
         entidadAbogados.setPrimerApellido(this.getPrimerApellido());
         entidadAbogados.setSegundoApellido(this.getPrimerApellido());
@@ -146,26 +160,29 @@ public class abogadosBean {
         entidadAbogados.setCelular(this.getCelular());       
         entidadAbogados.setEmail(this.getEmail());
         
-        if(entidadAbogados.GuardarAbogados(entidadAbogados)) {
-            msg = "Registro guardado exitosamente";                    
+        if(entidadAbogados.GuardarAbogados(entidadAbogados, getIdTipoAbogado(), isActivo())) {
+            msg = "Registro guardado exitosamente";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             msg = "Error al insertar los datos";
-        }
-        
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
-        FacesContext.getCurrentInstance().addMessage(null, message);        
+               FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }    
     }
     
     public void actualizar(ActionEvent evt){
-        String msg;
-            AbogadosDAO dao = new AbogadosDAOimpl();
+        String msg;            
         
-        if(dao.actualizarabogados(entidadAbogados)){
+        if(entidadAbogados.actualizarAbogados(entidadAbogados, getIdTipoAbogado(), isActivo())){
              msg = "Registro Actualizado Exitosamente";
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+             FacesContext.getCurrentInstance().addMessage(null, message);
         }else {
             msg = "Error al Actualizar los Datos";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        
     }
 }

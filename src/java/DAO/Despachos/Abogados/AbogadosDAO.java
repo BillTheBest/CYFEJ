@@ -4,12 +4,11 @@
  */
 package DAO.Despachos.Abogados;
 
-import Entidades.Abogados;
+import Modelos.Abogados;
 import java.util.List;
 
-public interface AbogadosDAO {
-    
+public interface AbogadosDAO {    
     public List<Abogados> findAllAbogados();
-    public boolean Crearabogados(Abogados entidad);
-    public boolean actualizarabogados(Abogados entidad);
+    public boolean Crearabogados(Abogados entidad, Long idTipoAbogado, boolean Activo);
+    public boolean actualizarabogados(Abogados entidad, Long idTipoAbogado, boolean Activo);
 }
