@@ -4,6 +4,7 @@
  */
 package DAO.Despachos.Personas;
 
+import Modelos.Persona;
 import Modelos.PersonaTipoPersona;
 import java.util.List;
 
@@ -13,4 +14,5 @@ import java.util.List;
  */
 public interface ptpDAO {
     public List<PersonaTipoPersona> listaPTP();
+    public boolean SavePTPersons(Persona persona,Long idTipoPersona);
 }

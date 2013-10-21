@@ -18,7 +18,7 @@ public class TipoPersonasDAOimpl implements TipoPersonasDAO{
     @Override
     public List<TipoPersona> findAllTipoPersonas() {
         List<TipoPersona> listaTipoPersonas = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session sesion = HibernateUtil.getSessionFactory().openSession();
         String hql = "from TipoPersona";
         try {
             sesion.beginTransaction();
@@ -27,13 +27,16 @@ public class TipoPersonasDAOimpl implements TipoPersonasDAO{
         } catch (Exception e) {
             sesion.beginTransaction().rollback();
         }
+        finally{
+            sesion.close();
+        }
         return listaTipoPersonas;
     }
 
     @Override
     public TipoPersona findbyID(Long id) {
         TipoPersona tipoPersona = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session sesion = HibernateUtil.getSessionFactory().openSession();
         String hql = "from TipoPersona tp where tp.idTipoPersona = "+id;
         try {
             sesion.beginTransaction();
@@ -41,6 +44,9 @@ public class TipoPersonasDAOimpl implements TipoPersonasDAO{
             sesion.beginTransaction().commit();
         } catch (Exception e) {
             sesion.beginTransaction().rollback();
+        }
+        finally{
+            sesion.close();
         }
         return tipoPersona;
     }

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Plantillas/Principal.xhtml">
+            <ui:define name="title">Asignar Personlidad</ui:define>
+            <ui:define name="content">
+                <p:growl id="msgs" showDetail="true" />
+                <br/>
+                <center>
+                    <h:form id="frmPersona">
+                        <p:panelGrid id="panelCrearPersona">
+
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="3">Formulario de Personas</p:column>
+                                </p:row>
+                            </f:facet>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Identificador: "></h:outputText></p:column>
+                                <p:column>
+                                    <p:inputText id="txtIdentificador" value="#{personasBean.entidadPersonas.idPersona}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton id="btnCrear" value="Cargar" oncomplete="dlgPersonas.show()"/>
+                                </p:column>  
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Nombre:" /></p:column>  
+                                <p:column colspan="2">
+                                    <p:inputText id="txtNombre" value="#{personasBean.entidadPersonas.nombrePersona}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Apellido:" /></p:column>
+                                <p:column colspan="2">
+                                    <p:inputText id="txtApellido" value="#{personasBean.entidadPersonas.primerApellido}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Cédula:" /></p:column>
+                                <p:column colspan="2">
+                                    <p:inputText id="txtCedula" value="#{personasBean.entidadPersonas.cedulaPersona}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Tipo Persona:" /></p:column>
+                                <p:column colspan="2">
+                                    <p:selectOneMenu id="cboTipoPersona" value="#{personasBean.idTipoPersona}" style="width: 165px;">
+                                        <f:selectItems value="#{tipoPersonaBean.listaPersonas}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <f:facet name="footer">
+                                <p:row>
+                                    <p:column colspan="3">
+                                        <p:commandButton value="Guardar" icon="ui-icon-check" style="margin:0" update=":regPersonas,:msgs, panelCrearPersona" 
+                                                         actionListener="#{personasBean.guardarPTP(evt)}"/>
+                                    </p:column>  
+                               </p:row>  
+                            </f:facet> 
+                        </p:panelGrid>
+                    </h:form>
+                </center>
+                <br/>
+                
+                <h:form id="regPersonas">
+                    <p:dataTable var="ptp" value="#{ptpBean.listaPTP()}" emptyMessage="Datos no Disponibles" 
+                                 paginator="true" rows="10"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" >
+                        
+                        <f:facet name="header">  
+                            Registro de Personas
+                        </f:facet>
+                        
+                        <p:column headerText="Nombre" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ptp.persona.nombrePersona}" /> 
+                        </p:column>  
+
+                        <p:column headerText="Primer Apellido" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ptp.persona.primerApellido}" />
+                        </p:column>
+                        
+                        <p:column headerText="Tipo Persona" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ptp.tipoPersona.descripcion}" />
+                        </p:column>
+                        
+                        <p:column headerText="Cédula" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ptp.persona.cedulaPersona}" />
+                        </p:column>
+
+                    </p:dataTable> 
+
+                </h:form>
+                
+                <h:form id="per">
+                    <p:dialog header="Registro de Personas" widgetVar="dlgPersonas" showEffect="explode" hideEffect="puff" modal="true">
+                        <p:dataTable id="table" var="persona" value="#{personasBean.listaPersonas()}" rows="10" paginator="true">  
+                            
+                            <p:column headerText="Identificador">  
+                                <h:outputText value="#{persona.idPersona}" />  
+                            </p:column>
+                            
+                            <p:column headerText="Nombre">  
+                                <h:outputText value="#{persona.nombrePersona}" />  
+                            </p:column>  
+
+                            <p:column headerText="Apellido">  
+                                <h:outputText value="#{persona.primerApellido}" />  
+                            </p:column>
+
+                            <p:column headerText="Cédula">  
+                                <h:outputText value="#{persona.cedulaPersona}" />  
+                            </p:column>
+
+                            <p:column style="width:4%">  
+                                <p:commandButton id="selectButton" update=":frmPersona" icon="ui-icon-search" title="View" oncomplete="dlgPersonas.hide()">  
+                                    <f:setPropertyActionListener value="#{persona}" target="#{personasBean.entidadPersonas}" />  
+                                </p:commandButton>  
+                            </p:column>  
+                        </p:dataTable>
+                    </p:dialog>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+        
+    </body>
+</html>

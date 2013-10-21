@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface PersonasDAO {
     public List<Persona> findAllPersons();
-    public boolean CreatePersons(Persona entidad, Long idTipoPersona, boolean activo);
-    public boolean UpdatePersons(Persona entidad, Long idTipoPersona, boolean activo);
+    public boolean CreatePersons(Persona entidad);
+    public boolean UpdatePersons(Persona entidad);
 }

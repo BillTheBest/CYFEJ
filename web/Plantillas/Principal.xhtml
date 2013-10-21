@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,14 +17,17 @@
     <h:body>
 
         <div id="top" class="ui-widget-header ui-corner-all">
-            <ui:insert name="top"><h1>Sistema de Control y Facturación de Expedientes Jurídicos</h1></ui:insert>
+            <ui:insert name="top"><h1 class="titulo">Sistema de Control y Facturación de Expedientes Jurídicos</h1></ui:insert>
         </div>
         
         <div id="menuBar">
             <h:form>
                 <p:menubar>  
-                    <p:submenu label="Registro" icon="ui-icon-document">  
-                        <p:menuitem value="Personas" url="#{appBean.urlPath()}frmCatalogoPersonas.xhtml" />
+                    <p:submenu label="Registro" icon="ui-icon-document">
+                        <p:submenu label="Personas">
+                            <p:menuitem value="Ingreso de Personas" url="#{appBean.urlPath()}frmCatalogoPersonas.xhtml"/>
+                            <p:menuitem value="Asignar Personalidad" url="#{appBean.urlPath()}frmAsignarTipoPersona.xhtml"/>
+                        </p:submenu>
                         <p:menuitem value="Abogados" url="#{appBean.urlPath()}frmCatalogoabogados.xhtml" />
                         <p:menuitem value="Tipos de Asunto" url="#{appBean.urlPath()}frmCatalogoTipoAsunto.xhtml" />
                         <p:menuitem value="Asuntos Judiciales" url="#{appBean.urlPath()}frmCatalogoAsuntoJudicial.xhtml" />
@@ -34,32 +38,12 @@
                     </p:submenu>  
 
                     <p:menuitem value="Agenda" url="#{appBean.urlPath()}frmAgenda.xhtml" />
-<!--                    <p:submenu label="Notas" icon="ui-icon-pencil">  
-                        <p:menuitem value="Agenda" url="#{appBean.urlPath()}frmAgenda.xhtml" />
-                        <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />  
-                    </p:submenu>  -->
-
-<!--                    <p:submenu label="Help" icon="ui-icon-help">  
-                        <p:menuitem value="Contents" url="#" />  
-                        <p:submenu label="Search" icon="ui-icon-search">  
-                            <p:submenu label="Text">  
-                                <p:menuitem value="Workspace" url="#" />  
-                            </p:submenu>  
-                            <p:menuitem value="File" url="#" />  
-                        </p:submenu>  
-                    </p:submenu>  
-
-                    <p:submenu label="Actions" icon="ui-icon-gear">  
-                        <p:submenu label="Ajax" icon="ui-icon-refresh">  
-                            <p:menuitem value="Save" actionListener="#{menuBean.save}" icon="ui-icon-disk"/>  
-                            <p:menuitem value="Update" actionListener="#{menuBean.update}" icon="ui-icon-arrowrefresh-1-w"/>  
-                        </p:submenu>  
-                        <p:submenu label="Non-Ajax" icon="ui-icon-newwin">  
-                            <p:menuitem value="Delete" actionListener="#{menuBean.delete}" icon="ui-icon-close" ajax="false"/>  
-                        </p:submenu>  
-                    </p:submenu>-->
-                    <p:menuitem value="Salir" actionListener="#{loginBean.logout}" icon="ui-icon-close" 
-                                oncomplete="handleLoginRequest(xhr, status, args)" />
+<!--                    <p:menuitem value="Salir" actionListener="#{loginBean.logout}" icon="ui-icon-close" 
+                                oncomplete="handleLoginRequest(xhr, status, args)" />-->
+                    <f:facet name="options">  
+                        <p:commandButton value="Cerrar Sesi&oacute;n" icon="ui-icon-extlink" actionListener="#{loginBean.logout}"
+                                         oncomplete="handleLoginRequest(xhr, status, args)" />  
+                    </f:facet> 
                 </p:menubar>
             </h:form>
         </div>
