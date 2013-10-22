@@ -9,7 +9,6 @@ import DAO.Despachos.Personas.ptpDAOimpl;
 import java.util.List;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -30,7 +29,6 @@ import javax.persistence.Transient;
 public class PersonaTipoPersona implements java.io.Serializable {
 
     private ptpIDs ids = new ptpIDs();
-    private boolean activo;
     private ptpDAO dao;
 
     public PersonaTipoPersona() {
@@ -63,20 +61,15 @@ public class PersonaTipoPersona implements java.io.Serializable {
     public void setTipoPersona(TipoPersona tipoPersona) {
         getIds().setTipoPersona(tipoPersona);
     }
-
-    @Column(name = "activo")
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
     
     public List<PersonaTipoPersona> listaPTP(){
         return dao.listaPTP();
     }
 
+    public boolean SavePTPersons(Persona persona, Long idTipoPersona){
+        return  dao.SavePTPersons(persona,idTipoPersona);
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {

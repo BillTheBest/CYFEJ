@@ -5,6 +5,7 @@
 package Beans;
 
 import Modelos.Persona;
+import Modelos.PersonaTipoPersona;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.inject.Named;
@@ -33,9 +34,11 @@ public class personasBean {
     private String observaciones;
     private boolean activo;
     private Persona entidadPersonas;
-    
+    private PersonaTipoPersona entidadptp;
+            
     public personasBean() {
         entidadPersonas = new Persona();
+        entidadptp = new PersonaTipoPersona();
     }
 
     public Long getIdTipoPersona() {
@@ -159,9 +162,10 @@ public class personasBean {
         entidadPersonas.setTelefono(this.getTelefonoPersona());
         entidadPersonas.setCelular(this.getCelularPersona());
         entidadPersonas.setEmail(this.getEmailPersona());
+        entidadPersonas.setActivo(isActivo());
         entidadPersonas.setObservaciones(this.getObservaciones());
 
-        if(entidadPersonas.GuardarPersona(entidadPersonas, getIdTipoPersona(), isActivo())){
+        if(entidadPersonas.GuardarPersona(entidadPersonas)){
             msg = "Registro Guardado Exitosamente";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -177,7 +181,7 @@ public class personasBean {
         
         String msg;
         
-        if(entidadPersonas.actualizarPersona(entidadPersonas, getIdTipoPersona(), isActivo())){
+        if(entidadPersonas.actualizarPersona(entidadPersonas)){
             msg = "Registro Actualizado Exitosamente";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -189,4 +193,19 @@ public class personasBean {
         
     }
     
+    public void guardarPTP(ActionEvent evt){
+        String msg;
+        
+        if(entidadptp.SavePTPersons(entidadPersonas, getIdTipoPersona())){
+            msg = "Registro Guardado Exitosamente";
+            entidadPersonas = null;
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        else{
+            msg = "Error al Insertar los Datos";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
 }

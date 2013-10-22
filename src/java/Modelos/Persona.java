@@ -28,6 +28,7 @@ public class Persona implements java.io.Serializable {
     private int celular;
     private String email;
     private String observaciones;
+    private boolean activo;
     private List<PersonaTipoPersona> ptp =  new ArrayList<PersonaTipoPersona>();
     private PersonasDAO dao;
 
@@ -141,6 +142,15 @@ public class Persona implements java.io.Serializable {
         this.observaciones = observaciones;
     }
 
+    @Column(name="activo")
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "ids.persona", cascade=CascadeType.ALL)
     public List<PersonaTipoPersona> getPtp() {
         return ptp;
@@ -150,24 +160,16 @@ public class Persona implements java.io.Serializable {
         this.ptp = ptp;
     }
    
-//    public Set<PersonaTipoPersona> getPTP() {
-//        return ptp;
-//    }
-//
-//    public void setPTP(Set<PersonaTipoPersona> ptp) {
-//        this.ptp = ptp;
-//    }
-    
     public List<Persona> listaPersonas(){
         return dao.findAllPersons();
     }
     
-    public boolean GuardarPersona(Persona entidad, Long idTipoPersona, boolean activo){
-        return dao.CreatePersons(entidad,idTipoPersona,activo);
+    public boolean GuardarPersona(Persona entidad){
+        return dao.CreatePersons(entidad);
     }
     
-    public boolean actualizarPersona(Persona entidad, Long idTipoPersona, boolean activo){
-        return  dao.UpdatePersons(entidad,idTipoPersona,activo);
+    public boolean actualizarPersona(Persona entidad){
+        return  dao.UpdatePersons(entidad);
     }
     
 }
