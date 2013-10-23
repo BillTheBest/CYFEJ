@@ -4,13 +4,18 @@ package Modelos;
 
 import DAO.Despachos.Abogados.ataDAO;
 import DAO.Despachos.Abogados.ataDAOimpl;
+import Entidades.Detallesexpediente;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -31,6 +36,7 @@ public class AbogadoTipoabogado  implements java.io.Serializable {
      private ataId id = new ataId();
      private boolean activo;
      private ataDAO dao;
+     private List<Detallesexpediente> detallesexpedientes = new ArrayList<Detallesexpediente>();
 
     public AbogadoTipoabogado() {
         dao = new ataDAOimpl();
@@ -75,7 +81,21 @@ public class AbogadoTipoabogado  implements java.io.Serializable {
     public List<AbogadoTipoabogado> listaATA(){
         return dao.listaATA();
     }
+    
+    public boolean guardarATAbogado(Abogados abogados, Long idTipoAbogado){
+        return  dao.guardarATAbogado(abogados,idTipoAbogado);
+    }
+
+    @OneToMany(cascade= CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="abogadoTipoabogado")
+    public List<Detallesexpediente> getDetallesexpedientes() {
+        return detallesexpedientes;
+    }
+
+    public void setDetallesexpedientes(List<Detallesexpediente> detallesexpedientes) {
+        this.detallesexpedientes = detallesexpedientes;
+    }
    
+    
       @Override
     public boolean equals(Object o) {
         if (this == o) {

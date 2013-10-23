@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <body>
+        <ui:composition template="./../Plantillas/Principal.xhtml">
+            <ui:define name="title">Asignar Tipo</ui:define>
+            <ui:define name="content">
+                <p:growl id="msgs" showDetail="true" />
+                <br/>
+                <center>
+                    <h:form id="frmabogados">
+                        <p:panelGrid id="panelCrearAbogado">
+
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="3">Formulario de Abogados</p:column>
+                                </p:row>
+                            </f:facet>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Identificador: "></h:outputText></p:column>
+                                <p:column>
+                                    <p:inputText id="txtIdentificador" value="#{abogadosBean.entidadAbogados.idAbogado}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton id="btnCrear" value="Cargar" oncomplete="dlgAbogados.show()"/>
+                                </p:column>  
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Nombre:" /></p:column>  
+                                <p:column colspan="2">
+                                    <p:inputText id="txtNombre" value="#{abogadosBean.entidadAbogados.nombre}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Apellido:" /></p:column>
+                                <p:column colspan="2">
+                                    <p:inputText id="txtApellido" value="#{abogadosBean.entidadAbogados.primerApellido}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="No de Carnet:" /></p:column>
+                                <p:column colspan="2">
+                                    <p:inputText id="txtCedula" value="#{abogadosBean.entidadAbogados.noCarne}"/>
+                                </p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Tipo Abogado:" /></p:column>
+                                <p:column colspan="2">
+                                    <p:selectOneMenu id="cboTipoAbogado" value="#{abogadosBean.idTipoAbogado}" style="width: 165px;">
+                                        <f:selectItems value="#{tipoAbogadoBean.listaAbogados}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <f:facet name="footer">
+                                <p:row>
+                                    <p:column colspan="3">
+                                        <p:commandButton value="Guardar" icon="ui-icon-check" style="margin:0" update=":regAbogados,:msgs, panelCrearAbogado" 
+                                                         actionListener="#{abogadosBean.guardarATA(evt)}"/>
+                                    </p:column>  
+                               </p:row>  
+                            </f:facet> 
+                        </p:panelGrid>
+                    </h:form>
+                </center>
+                <br/>
+                
+                <h:form id="regAbogados">
+                    <p:dataTable var="ata" value="#{ataBean.listaATA()}" emptyMessage="Datos no Disponibles" 
+                                 paginator="true" rows="10"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" >
+                        
+                        <f:facet name="header">  
+                            Registro de Abogados
+                        </f:facet>
+                        
+                        <p:column headerText="Nombre" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ata.abogados.nombre}" /> 
+                        </p:column>  
+
+                        <p:column headerText="Primer Apellido" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ata.abogados.primerApellido}" />
+                        </p:column>
+                        
+                        <p:column headerText="Tipo Persona" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ata.tipoabogado.descripcion}" />
+                        </p:column>
+                        
+                        <p:column headerText="No de carnet" style="width:15%; text-align: center"> 
+                            <h:outputText value="#{ata.abogados.noCarne}" />
+                        </p:column>
+
+                    </p:dataTable> 
+
+                </h:form>
+                
+                <h:form id="abo">
+                    <p:dialog header="Registro de Abogados" widgetVar="dlgAbogados" showEffect="explode" hideEffect="puff" modal="true">
+                        <p:dataTable id="table" var="abogado" value="#{abogadosBean.listaAbogados()}" rows="10" paginator="true">  
+                            
+                            <p:column headerText="Identificador">  
+                                <h:outputText value="#{abogado.idAbogado}" />  
+                            </p:column>
+                            
+                            <p:column headerText="Nombre">  
+                                <h:outputText value="#{abogado.nombre}" />  
+                            </p:column>  
+
+                            <p:column headerText="Apellido">  
+                                <h:outputText value="#{abogado.primerApellido}" />  
+                            </p:column>
+
+                            <p:column headerText="No de carnet">  
+                                <h:outputText value="#{abogado.noCarne}" />  
+                            </p:column>
+
+                            <p:column style="width:4%">  
+                                <p:commandButton id="selectButton" update=":frmAbogados" icon="ui-icon-search" title="View" oncomplete="dlgAbogados.hide()">  
+                                    <f:setPropertyActionListener value="#{abogado}" target="#{abogadosBean.entidadAbogados}" />  
+                                </p:commandButton>  
+                            </p:column>  
+                        </p:dataTable>
+                    </p:dialog>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+        
+    </body>
+</html>

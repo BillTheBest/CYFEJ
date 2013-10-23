@@ -4,6 +4,7 @@
  */
 package Beans;
 
+import Modelos.AbogadoTipoabogado;
 import Modelos.Abogados;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -32,10 +33,12 @@ public class abogadosBean {
     private int celular;
     private String email;
     private boolean activo;
-    private Abogados entidadAbogados;    
+    private Abogados entidadAbogados;  
+    private AbogadoTipoabogado entidadata;
     
     public abogadosBean() {
         entidadAbogados = new Abogados();
+        entidadata = new AbogadoTipoabogado();
     }
 
     public Long getIdTipoAbogado() {
@@ -182,7 +185,22 @@ public class abogadosBean {
             msg = "Error al Actualizar los Datos";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
-        }
+        }      
+    }
+    
+     public void guardarATA(ActionEvent evt){
+        String msg;
         
+        if(entidadata.guardarATAbogado(entidadAbogados, getIdTipoAbogado())){
+            msg = "Registro Guardado Exitosamente";
+            entidadAbogados = null;
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        else{
+            msg = "Error al Insertar los Datos";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Registro de Datos",msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
 }

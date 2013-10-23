@@ -33,6 +33,7 @@ public class Abogados  implements java.io.Serializable {
      private int telefono;
      private int celular;
      private String email;
+     private boolean activo;
      private List<AbogadoTipoabogado> ata = new ArrayList<AbogadoTipoabogado>();
      private AbogadosDAO dao;
 
@@ -144,8 +145,18 @@ public class Abogados  implements java.io.Serializable {
     }
     
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email;       
     }
+    
+    @Column(name="activo")
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.abogados", cascade=CascadeType.ALL)
    
    public List<AbogadoTipoabogado> getata() {
