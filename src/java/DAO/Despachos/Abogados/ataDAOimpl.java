@@ -20,7 +20,7 @@ public class ataDAOimpl implements ataDAO{
     @Override
     public List<AbogadoTipoabogado> listaATA() {
         List<AbogadoTipoabogado> atalist = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session sesion = HibernateUtil.getSessionFactory().openSession();
         String hql = "from AbogadoTipoabogado ata ";
         try {
             sesion.beginTransaction();
@@ -28,6 +28,9 @@ public class ataDAOimpl implements ataDAO{
             sesion.beginTransaction().commit();
         } catch (Exception e) {
             sesion.beginTransaction().rollback();
+        }
+        finally{
+            sesion.close();
         }
         return atalist;
     }

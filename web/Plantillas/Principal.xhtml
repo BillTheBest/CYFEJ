@@ -28,7 +28,10 @@
                             <p:menuitem value="Ingreso de Personas" url="#{appBean.urlPath()}frmCatalogoPersonas.xhtml"/>
                             <p:menuitem value="Asignar Personalidad" url="#{appBean.urlPath()}frmAsignarTipoPersona.xhtml"/>
                         </p:submenu>
-                        <p:menuitem value="Abogados" url="#{appBean.urlPath()}frmCatalogoabogados.xhtml" />
+                        <p:submenu label="Abogados">
+                            <p:menuitem value="Ingreso de Abogados" url="#{appBean.urlPath()}frmCatalogoabogados.xhtml"/>
+                            <p:menuitem value="Asignar Tipo" url="#{appBean.urlPath()}frmAsignarTipoAbogado.xhtml"/>
+                        </p:submenu>                       
                         <p:menuitem value="Tipos de Asunto" url="#{appBean.urlPath()}frmCatalogoTipoAsunto.xhtml" />
                         <p:menuitem value="Asuntos Judiciales" url="#{appBean.urlPath()}frmCatalogoAsuntoJudicial.xhtml" />
                         <p:menuitem value="Juzgados" url="#{appBean.urlPath()}frmCatalogoJuzgados.xhtml" />

@@ -34,9 +34,7 @@ public class AbogadoTipoabogado  implements java.io.Serializable {
 
 
      private ataId id = new ataId();
-     private boolean activo;
      private ataDAO dao;
-     private List<Detallesexpediente> detallesexpedientes = new ArrayList<Detallesexpediente>();
 
     public AbogadoTipoabogado() {
         dao = new ataDAOimpl();
@@ -68,16 +66,7 @@ public class AbogadoTipoabogado  implements java.io.Serializable {
     public void setTipoabogado(Tipoabogado tipoabogado){
         getId().setTipoAbogado(tipoabogado);
     }
-            
-    @Column(name = "activo")
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-    
+     
     public List<AbogadoTipoabogado> listaATA(){
         return dao.listaATA();
     }
@@ -85,16 +74,6 @@ public class AbogadoTipoabogado  implements java.io.Serializable {
     public boolean guardarATAbogado(Abogados abogados, Long idTipoAbogado){
         return  dao.guardarATAbogado(abogados,idTipoAbogado);
     }
-
-    @OneToMany(cascade= CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="abogadoTipoabogado")
-    public List<Detallesexpediente> getDetallesexpedientes() {
-        return detallesexpedientes;
-    }
-
-    public void setDetallesexpedientes(List<Detallesexpediente> detallesexpedientes) {
-        this.detallesexpedientes = detallesexpedientes;
-    }
-   
     
       @Override
     public boolean equals(Object o) {

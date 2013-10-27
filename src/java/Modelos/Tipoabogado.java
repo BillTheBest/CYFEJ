@@ -1,7 +1,6 @@
 package Modelos;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
-import DAO.Despachos.Abogados.AbogadosDAOimpl;
 import DAO.Despachos.Abogados.TipoAbogadosDAO;
 import DAO.Despachos.Abogados.TipoAbogadosDAOimpl;
 import java.util.ArrayList;

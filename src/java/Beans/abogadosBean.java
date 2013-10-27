@@ -163,7 +163,7 @@ public class abogadosBean {
         entidadAbogados.setCelular(this.getCelular());       
         entidadAbogados.setEmail(this.getEmail());
         
-        if(entidadAbogados.GuardarAbogados(entidadAbogados, getIdTipoAbogado(), isActivo())) {
+        if(entidadAbogados.GuardarAbogados(entidadAbogados)) {
             msg = "Registro guardado exitosamente";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -177,7 +177,7 @@ public class abogadosBean {
     public void actualizar(ActionEvent evt){
         String msg;            
         
-        if(entidadAbogados.actualizarAbogados(entidadAbogados, getIdTipoAbogado(), isActivo())){
+        if(entidadAbogados.actualizarAbogados(entidadAbogados)){
              msg = "Registro Actualizado Exitosamente";
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro de Datos",msg);
              FacesContext.getCurrentInstance().addMessage(null, message);

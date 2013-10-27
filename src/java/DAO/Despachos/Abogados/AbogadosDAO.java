@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface AbogadosDAO {    
     public List<Abogados> findAllAbogados();
-    public boolean Crearabogados(Abogados entidad, Long idTipoAbogado, boolean Activo);
-    public boolean actualizarabogados(Abogados entidad, Long idTipoAbogado, boolean Activo);
+    public boolean Crearabogados(Abogados entidad);
+    public boolean actualizarabogados(Abogados entidad);
 }
