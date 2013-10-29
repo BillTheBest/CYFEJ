@@ -15,9 +15,7 @@ and open the template in the editor.
             <ui:define name="title">Catálogo de Expedientes</ui:define>
             <ui:define name="content">
                 <p:growl id="msgs" showDetail="true" />
-                 <h:form>
-                    <p:commandButton id="btnCrearExpedientes" value="Crear" update=":frmCrear" oncomplete="dialogExpedientesCrear.show()" icon="icon-crear" title="Crear"/>
-                </h:form>
+                
                 <h:form id="regExpedientes">
                     <p:dataTable var="expediente" value="#{expedientesBean.listaExpedientes()}" emptyMessage="Datos no Disponibles" scrollable="true"
                                  paginator="true" rows="10"
@@ -48,7 +46,6 @@ and open the template in the editor.
                             <h:outputText value="#{expediente.anio}" /> 
                         </p:column>
                         
-                        
                         <p:column style="width:4%">  
                             <p:commandButton id="selectButton" update=":frmActualizar" oncomplete="dialogExpedientesActualizar.show()" icon="icon-editar" title="Editar">  
                                 <f:setPropertyActionListener value="#{expediente}" target="#{expedientesBean.entidadExpedientes}" />  
@@ -56,40 +53,6 @@ and open the template in the editor.
                         </p:column>
                     </p:dataTable> 
                   </h:form>
-                
-                <h:form id="frmCrear">
-
-                    <p:dialog header="Crear" widgetVar="dialogExpedientesCrear" resizable="false" id="perDlgCrear"  
-                              showEffect="fade" hideEffect="explode" modal="false">  
-
-                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-                            <h:outputText value="ID:" />  
-                            <p:inputText value="#{expedientesBean.idExpediente}" style="font-weight:bold" readonly="true"/>  
-
-                            <h:outputText value="Descripcion:" />  
-                            <p:inputText value="#{expedientesBean.descripcion}" style="font-weight:bold"/>  
-
-                            <h:outputText value="Fecha de Alta:" />  
-                            <p:inputText value="#{expedientesBean.fechaAlta}" style="font-weight:bold"/>
-                            
-                            <h:outputText value="Fecha de baja:" />  
-                            <p:inputText value="#{expedientesBean.fechaBaja}" style="font-weight:bold"/>
-                            
-                            <h:outputText value="Año actual:" />  
-                            <p:inputText value="#{expedientesBean.anio}" style="font-weight:bold"/>
-                            
-                            
-                            <f:facet name="footer">
-                                <p:separator/>
-                                <p:commandButton id="btnCrearAceptar" value="Guardar" update=":regExpedientes, :msgs" 
-                                                 actionListener="#{expedientesBean.guardar(evt)}" oncomplete="dialogExpedientesCrear.hide()" 
-                                                 icon="icon-save" title="Guardar"/>
-                                <p:commandButton id="btnCrearCancelar" value="Cancelar" oncomplete="dialogExpedientesCrear.hide()" 
-                                                 icon="icon-cancelar" title="Cancelar"/>
-                            </f:facet>
-                        </h:panelGrid>  
-                    </p:dialog>  
-                </h:form>
                 
                 <h:form id="frmActualizar">
 

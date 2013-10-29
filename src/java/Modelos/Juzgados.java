@@ -3,7 +3,9 @@ package Modelos;
 
 import DAO.Despachos.Juzgados.JuzgadosDAO;
 import DAO.Despachos.Juzgados.JuzgadosDAOimpl;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +29,8 @@ public class Juzgados implements java.io.Serializable {
     private String descripcion;
     private String direccion;
     private int telefono;
-    private Integer celular;
+    private int celular;
+    private List<Asuntojuzgado> asuntojuzgados = new ArrayList<Asuntojuzgado>();
     private JuzgadosDAO dao;
 
     public Juzgados() {
@@ -98,14 +102,24 @@ public class Juzgados implements java.io.Serializable {
     }
 
     @Column(name = "celular")
-    public Integer getCelular() {
+    public int getCelular() {
         return this.celular;
     }
 
-    public void setCelular(Integer celular) {
+    public void setCelular(int celular) {
         this.celular = celular;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ids.juzgados", cascade=CascadeType.ALL)
+    public List<Asuntojuzgado> getAsuntojuzgados() {
+        return asuntojuzgados;
+    }
+
+    public void setAsuntojuzgados(List<Asuntojuzgado> asuntojuzgados) {
+        this.asuntojuzgados = asuntojuzgados;
+    }
+
+    
     public List<Juzgados> listaJuzgados() {
         return dao.listaJuzgados();
     }

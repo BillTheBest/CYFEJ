@@ -1,8 +1,7 @@
 package Modelos;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +18,7 @@ public class Rol implements java.io.Serializable{
     
     private Long idRol;
     private String nombreRol;
-    private Set<Usuarios> usuario = new HashSet<Usuarios>(0);
+    private List<Usuarios> usuario = new ArrayList<Usuarios>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,11 +41,11 @@ public class Rol implements java.io.Serializable{
     }
 
     @OneToMany(fetch= FetchType.LAZY, mappedBy="roles")
-    public Set<Usuarios> getUsuario() {
+    public List<Usuarios> getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Set<Usuarios> usuario) {
+    public void setUsuario(List<Usuarios> usuario) {
         this.usuario = usuario;
     }
     

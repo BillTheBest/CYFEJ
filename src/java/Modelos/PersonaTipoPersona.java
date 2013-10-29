@@ -6,12 +6,16 @@ package Modelos;
 
 import DAO.Despachos.Personas.ptpDAO;
 import DAO.Despachos.Personas.ptpDAOimpl;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -30,6 +34,7 @@ public class PersonaTipoPersona implements java.io.Serializable {
 
     private ptpIDs ids = new ptpIDs();
     private ptpDAO dao;
+    private List<Detallesexpediente> detallesExpedientes = new ArrayList<Detallesexpediente>();
 
     public PersonaTipoPersona() {
         dao = new ptpDAOimpl();
@@ -61,15 +66,24 @@ public class PersonaTipoPersona implements java.io.Serializable {
     public void setTipoPersona(TipoPersona tipoPersona) {
         getIds().setTipoPersona(tipoPersona);
     }
-    
-    public List<PersonaTipoPersona> listaPTP(){
+
+    public List<PersonaTipoPersona> listaPTP() {
         return dao.listaPTP();
     }
 
-    public boolean SavePTPersons(Persona persona, Long idTipoPersona){
-        return  dao.SavePTPersons(persona,idTipoPersona);
+    public boolean SavePTPersons(Persona persona, Long idTipoPersona) {
+        return dao.SavePTPersons(persona, idTipoPersona);
     }
-    
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "personaTipopersona")
+    public List<Detallesexpediente> getDetallesExpedientes() {
+        return detallesExpedientes;
+    }
+
+    public void setDetallesExpedientes(List<Detallesexpediente> detallesExpedientes) {
+        this.detallesExpedientes = detallesExpedientes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -93,5 +107,4 @@ public class PersonaTipoPersona implements java.io.Serializable {
     public int hashCode() {
         return (getIds() != null ? getIds().hashCode() : 0);
     }
-    
 }

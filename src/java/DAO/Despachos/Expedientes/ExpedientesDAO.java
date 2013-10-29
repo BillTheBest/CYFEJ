@@ -4,7 +4,7 @@
  */
 package DAO.Despachos.Expedientes;
 
-import Entidades.Expediente;
+import Modelos.Expediente;
 import java.util.List;
 
 /**

@@ -1,6 +1,9 @@
 package Modelos;
 // Generated 09-06-2013 07:53:46 PM by Hibernate Tools 3.2.1.GA
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,9 +24,11 @@ public class Usuarios implements java.io.Serializable {
 
     private Long idUsuarios;
     private String alias;
-    private String contrasena;    
+    private String contrasena;
     private boolean activo;
     private Rol roles;
+    private List<Estadoevolutivo> estadoevolutivos = new ArrayList<Estadoevolutivo>();
+    private List<Expediente> expediente = new ArrayList<Expediente>();
 
     public Usuarios() {
     }
@@ -71,8 +77,8 @@ public class Usuarios implements java.io.Serializable {
         this.activo = activo;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idRol", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idRol", nullable = false)
     public Rol getRoles() {
         return roles;
     }
@@ -80,5 +86,22 @@ public class Usuarios implements java.io.Serializable {
     public void setRoles(Rol roles) {
         this.roles = roles;
     }
-    
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuarios")
+    public List<Estadoevolutivo> getEstadoevolutivos() {
+        return estadoevolutivos;
+    }
+
+    public void setEstadoevolutivos(List<Estadoevolutivo> estadoevolutivos) {
+        this.estadoevolutivos = estadoevolutivos;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuarios")
+    public List<Expediente> getExpediente() {
+        return expediente;
+    }
+
+    public void setExpediente(List<Expediente> expediente) {
+        this.expediente = expediente;
+    }
 }

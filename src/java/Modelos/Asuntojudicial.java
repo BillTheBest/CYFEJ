@@ -3,7 +3,9 @@ package Modelos;
 
 import DAO.Despachos.AsuntosJudiciales.AsuntoJudicialDAO;
 import DAO.Despachos.AsuntosJudiciales.AsuntoJudicialDAOimpl;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +28,7 @@ public class Asuntojudicial implements java.io.Serializable {
     private Tipoasunto tipoasunto;
     private String descripcion;
     private boolean activo;
+    private List<Asuntojuzgado> asuntojuzgados = new ArrayList<Asuntojuzgado>();
     private AsuntoJudicialDAO dao;
 
     public Asuntojudicial() {
@@ -75,6 +79,15 @@ public class Asuntojudicial implements java.io.Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ids.asuntojudicial", cascade=CascadeType.ALL)
+    public List<Asuntojuzgado> getAsuntojuzgados() {
+        return asuntojuzgados;
+    }
+
+    public void setAsuntojuzgados(List<Asuntojuzgado> asuntojuzgados) {
+        this.asuntojuzgados = asuntojuzgados;
     }
 
     public List<Asuntojudicial> listaAsunto() {

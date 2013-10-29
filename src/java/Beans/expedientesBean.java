@@ -6,12 +6,10 @@ package Beans;
 
 import DAO.Despachos.Expedientes.ExpedientesDAO;
 import DAO.Despachos.Expedientes.ExpedientesDAOimpl;
-import Entidades.Expediente;
+import Modelos.Expediente;
 import java.awt.event.ActionEvent;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -25,26 +23,22 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class expedientesBean {
 
-     private Integer idExpediente;
+     private Long idExpediente;
      private String descripcion;
      private Date fechaAlta;
      private Date fechaBaja;
      private int anio;
-     private int idAsuntoJudicial;
-     private int idJuzgados;
-     private int idUsuarios;
-     private Set estadoexpedientes = new HashSet(0);
      private Expediente entidadExpedientes;
      
     public expedientesBean() {
         entidadExpedientes = new Expediente();
     }
 
-    public Integer getIdExpediente() {
+    public Long getIdExpediente() {
         return idExpediente;
     }
 
-    public void setIdExpediente(Integer idExpediente) {
+    public void setIdExpediente(Long idExpediente) {
         this.idExpediente = idExpediente;
     }
 

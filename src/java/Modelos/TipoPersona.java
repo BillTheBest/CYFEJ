@@ -59,13 +59,6 @@ public class TipoPersona implements java.io.Serializable{
     public void setPtp(List<PersonaTipoPersona> ptp) {
         this.ptp = ptp;
     }
-//    public Set<PersonaTipoPersona> getPTP() {
-//        return ptp;
-//    }
-//
-//    public void setPTP(Set<PersonaTipoPersona> ptp) {
-//        this.ptp = ptp;
-//    }
     
     public List<TipoPersona> listaTipoPersona(){
         return dao.findAllTipoPersonas();
